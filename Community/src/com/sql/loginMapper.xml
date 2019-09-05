@@ -3,6 +3,23 @@
 
 <mapper namespace="com.login">
 
-
+	<insert id="insertUser" parameterType="UserDto">
+		INSERT INTO D_USER VALUES (#{email},#{password},#{nick},#{phone},'Y','UESR')
+	</insert>
+	
+	<sql id="a">
+		SELECT EMAIL, PASSWORD, NICK, PHONE, ENABLED, ROLE
+		FROM D_USER
+	</sql>
+	
+	<select id="getLogin" parameterType="Map" resultType="UserDto">
+		<include refid="a"></include>
+		WHERE EMAIL=#{email} AND PASSWORD=#{password}
+	</select>
+	
+	<select id="emailChk" parameterType="String" resultType="UserDto">
+		<include refid="a"></include>
+		WHERE EMAIL=#{email}
+	</select>
 	
 </mapper>
