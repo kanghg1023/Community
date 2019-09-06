@@ -22,6 +22,13 @@ public class UserDto {
 		this.enabled = enabled;
 		this.role = role;
 	}
+	
+	public UserDto(String email, String nick, String phone) {
+		super();
+		this.email = email;
+		this.nick = nick;
+		this.phone = phone;
+	}
 
 	public String getEmail() {
 		return email;

@@ -1,6 +1,8 @@
 package com.daos;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -72,4 +74,113 @@ public class UserDao extends SqlMapConfig {
 		
 		return dto;
 	}
+	
+	public List<UserDto> getAllUserStatus(){
+		List<UserDto> list = new ArrayList<>();
+		
+		SqlSession sqlSession = null;
+		
+		try {
+			sqlSession = getSqlSessionFactory().openSession(true);
+			list = sqlSession.selectList(nameSpace+"getAllUserStatus");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			sqlSession.close();
+		}
+		
+		return list;
+	}
+	
+	public List<UserDto> getAllUserList(){
+		List<UserDto> list = new ArrayList<>();
+		
+		SqlSession sqlSession = null;
+		
+		try {
+			sqlSession = getSqlSessionFactory().openSession(true);
+			list = sqlSession.selectList(nameSpace+"getAllUserList");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			sqlSession.close();
+		}
+		
+		return list;
+	}
+	
+	public boolean authchange(String email, String role){
+		int count = 0; 
+		Map<String, String> map = new HashMap<>();
+		map.put("email",email);
+		map.put("role",role);
+		
+		SqlSession sqlSession = null;
+		
+		try {
+			sqlSession = getSqlSessionFactory().openSession(true);
+			count = sqlSession.update(nameSpace+"authchange", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			sqlSession.close();
+		}
+		
+		return count>0 ? true : false;
+	}
+	
+	
+	public boolean userUpdate(UserDto dto){
+		int count = 0; 
+		
+		SqlSession sqlSession = null;
+		
+		try {
+			sqlSession = getSqlSessionFactory().openSession(true);
+			count = sqlSession.update(nameSpace+"userUpdate", dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			sqlSession.close();
+		}
+		
+		return count>0 ? true : false;
+	}
+	
+	public boolean withdraw(String email){
+		int count = 0; 
+		
+		SqlSession sqlSession = null;
+		
+		try {
+			sqlSession = getSqlSessionFactory().openSession(true);
+			count = sqlSession.update(nameSpace+"withdraw", email);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			sqlSession.close();
+		}
+		
+		return count>0 ? true : false;
+	}
+	
+	
+	public UserDto getInfo(String email) {
+		UserDto dto = new UserDto();
+		
+		SqlSession sqlSession = null;
+		
+		try {
+			sqlSession = getSqlSessionFactory().openSession(true);
+			dto = sqlSession.selectOne(nameSpace+"getInfo", email);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			sqlSession.close();
+		}
+		
+		return dto;
+	}
+	
+	
 }

@@ -74,66 +74,57 @@ public class LoginController extends HttpServlet {
 			session.invalidate(); //세션지우기
 			response.sendRedirect("index.jsp");
 		}else if(command.equals("emailChk")){
-			String rid = request.getParameter("rid");
-			UserDto dto = dao.emailChk(rid);
+			String email = request.getParameter("email");
+			UserDto dto = dao.emailChk(email);
 			request.setAttribute("dto", dto);
 			dispatch("emailchkform.jsp", request, response); //여기부터
-		}
-//			else if(command.equals("alluserstatus")){
-//			List<UserDto> list = dao.getAllUserStatus();
-//			request.setAttribute("list", list);
-//			dispatch("userlist_status.jsp", request, response);
-//		}else if(command.equals("alluserlist")){
-//			List<UserDto> list = dao.getAllUserList();
-//			request.setAttribute("list", list);
-//			dispatch("userlist.jsp", request, response);
-//		}else if(command.equals("roleForm")){
-//			String rid = request.getParameter("rid");
-//			UserDto dto = dao.getUser(rid); //등급을 변경하려는 회원의 정보를 구함
-//			request.setAttribute("dto", dto);
-//			dispatch("authfrom.jsp", request, response);
-//		}else if(command.equals("authchange")){
-//			String rid = request.getParameter("rid");
-//			String rrole = request.getParameter("rrole");
-//			boolean isS = dao.updateUserRole(rid, rrole);
-//			if(isS){
-//				jsForward("LoginController.do?command=alluserlist","회원등급을 수정했습니다.",response);
-//			}else{
+		}else if(command.equals("alluserstatus")){
+			List<UserDto> list = dao.getAllUserStatus();
+			request.setAttribute("list", list);
+			dispatch("userlist_status.jsp", request, response);
+		}else if(command.equals("alluserlist")){
+			List<UserDto> list = dao.getAllUserList();
+			request.setAttribute("list", list);
+			dispatch("userlist.jsp", request, response);
+		}else if(command.equals("authchange")){
+			String email = request.getParameter("email");
+			String role = request.getParameter("role");
+			boolean isS = dao.authchange(email, role);
+			if(isS){
+				jsForward("LoginController.do?command=alluserlist","회원등급을 수정했습니다.",response);
+			}
+//			else{
 //				request.setAttribute("msg", "회원등급 변경실패");
 //				dispatch("error.jsp", request, response);
 //			}
-//		}else if(command.equals("userinfo")){
-//			String rid = request.getParameter("rid");
-//			UserDto dto = dao.userinfo(rid);
-//			request.setAttribute("dto", dto);
-//			dispatch("user_info.jsp", request, response);
-//		}else if(command.equals("userUpdate")){
-//			String rid = request.getParameter("rid");
-//			UserDto dto = dao.userinfo(rid);
-//			request.setAttribute("dto", dto);
-//			dispatch("userupdate.jsp", request, response);
-//		}else if(command.equals("update")){
-//			String rid = request.getParameter("rid");
-//			String raddress = request.getParameter("raddress");
-//			String rphone = request.getParameter("rphone");
-//			String remail = request.getParameter("remail");
-//			boolean isS = dao.userUpdate(new UserDto(rid,raddress,rphone,remail));
-//			if(isS){
-//				jsForward("LoginController.do?command=userinfo&rid="+rid,"회원정보을 수정했습니다.",response);
-//			}else{
-//				request.setAttribute("msg", "회원정보 수정실패");
-//				dispatch("error.jsp", request, response);
-//			}
-//		}else if(command.equals("withdraw")){
-//			String rid = request.getParameter("rid");
-//			boolean isS = dao.withdraw(rid);
-//			if(isS){
-//				jsForward("LoginController.do?command=logout","탈퇴하였습니다.",response);
-//			}else{
-//				request.setAttribute("msg", "회원 탈퇴실패");
-//				dispatch("error.jsp", request, response);
-//			}
-//		}else if(command.equals("boardlist")){
+		}else if(command.equals("userinfo")){
+			response.sendRedirect("user_info.jsp");
+		}else if(command.equals("userUpdate")){
+			response.sendRedirect("userupdate.jsp");
+		}else if(command.equals("update")){
+			String email = request.getParameter("email");
+			String nick = request.getParameter("nick");
+			String phone = request.getParameter("phone");
+			boolean isS = dao.userUpdate(new UserDto(email,nick,phone));
+			if(isS){
+				UserDto ldto = dao.getInfo(email);
+				session.setAttribute("ldto", ldto); //세션 재삽입
+				jsForward("LoginController.do?command=userinfo","회원정보을 수정했습니다.",response);
+			}else{
+				request.setAttribute("msg", "회원정보 수정실패");
+				dispatch("error.jsp", request, response);
+			}
+		}else if(command.equals("withdraw")){
+			UserDto ldto = (UserDto)session.getAttribute("ldto");
+			boolean isS = dao.withdraw(ldto.getEmail());
+			if(isS){
+				jsForward("LoginController.do?command=logout","탈퇴하였습니다.",response);
+			}else{
+				request.setAttribute("msg", "회원 탈퇴실패");
+				dispatch("error.jsp", request, response);
+			}
+		}
+//		else if(command.equals("boardlist")){
 //			dispatch("BoardController.do?command=boardlist", request, response);
 //		}
 		

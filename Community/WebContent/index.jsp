@@ -52,8 +52,8 @@
 					<a href="LoginController.do?command=logout">로그아웃</a>
 				</div>
 				<ul>
-					<li><a href="LoginController.do?command=alluserstatus">회원상태정보조회</a></li>
-					<li><a href="LoginController.do?command=alluserlist">회원정보목록조회</a></li>
+					<li><a href="LoginController.do?command=alluserstatus">전체회원정보</a></li>
+					<li><a href="LoginController.do?command=alluserlist">사용중인회원목록</a></li>
 				</ul>
 				<%
 			}else {

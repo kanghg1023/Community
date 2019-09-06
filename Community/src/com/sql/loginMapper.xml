@@ -4,22 +4,51 @@
 <mapper namespace="com.login">
 
 	<insert id="insertUser" parameterType="UserDto">
-		INSERT INTO D_USER VALUES (#{email},#{password},#{nick},#{phone},'Y','UESR')
+		INSERT INTO D_USER VALUES (#{email},#{password},#{nick},#{phone},'Y','USER')
 	</insert>
 	
 	<sql id="a">
 		SELECT EMAIL, PASSWORD, NICK, PHONE, ENABLED, ROLE
 		FROM D_USER
 	</sql>
-	
+<!-- 	로그인 -->
 	<select id="getLogin" parameterType="Map" resultType="UserDto">
 		<include refid="a"></include>
 		WHERE EMAIL=#{email} AND PASSWORD=#{password}
 	</select>
 	
-	<select id="emailChk" parameterType="String" resultType="UserDto">
+<!-- 	정보수정후 세션갱신을 위한 쿼리 -->
+	<select id="getInfo" parameterType="String" resultType="UserDto">
 		<include refid="a"></include>
 		WHERE EMAIL=#{email}
 	</select>
+	
+	<select id="emailChk" parameterType="String" resultType="UserDto">
+		SELECT EMAIL FROM D_USER WHERE EMAIL=#{email}
+	</select>
+	
+<!-- 	전체 회원 조회 (탈퇴O) -->
+	<select id="getAllUserStatus" resultType="UserDto">
+		<include refid="a"></include>
+		ORDER BY EMAIL
+	</select>
+<!-- 	전체 회원 조회 (탈퇴X) -->
+	<select id="getAllUserList" resultType="UserDto">
+		<include refid="a"></include>
+		WHERE ENABLED='Y'
+		ORDER BY EMAIL
+	</select>
+	
+	<update id="authchange" parameterType="Map">
+		UPDATE D_USER SET ROLE=#{role} WHERE EMAIL=#{email}
+	</update>
+	
+	<update id="userUpdate" parameterType="UserDto">
+		UPDATE D_USER SET NICK=#{nick}, PHONE=#{phone} WHERE EMAIL=#{email}
+	</update>
+	
+	<update id="withdraw" parameterType="String">
+		UPDATE D_USER SET ENABLED='N' WHERE EMAIL=#{email}
+	</update>
 	
 </mapper>

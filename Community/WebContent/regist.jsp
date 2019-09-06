@@ -15,11 +15,11 @@
 		var form = document.getElementsByTagName("form")[0];
 		form.onsubmit = function(){
 			var inputs = document.querySelectorAll("table input");
-			if(inputs[3].value != inputs[4].value){
+			if(inputs[2].value != inputs[3].value){
 				alert("비밀번호를 확인하시오");
+				inputs[2].value = "";
 				inputs[3].value = "";
-				inputs[4].value = "";
-				inputs[3].focus();
+				inputs[2].focus();
 				return false;
 			}else{
 				for (var i=0;i<inputs.length;i++) {
