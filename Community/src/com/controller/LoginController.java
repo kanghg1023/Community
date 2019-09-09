@@ -58,7 +58,7 @@ public class LoginController extends HttpServlet {
 			UserDto ldto = dao.getLogin(email,password);
 			if(ldto == null || ldto.getEmail()==null){
 				request.setAttribute("msg", "아이디나 패스워드를 확인하세요");
-				dispatch("error.jsp", request, response);
+				dispatch("index.jsp", request, response);
 			}else{
 				if(ldto.getEnabled().equals("N")){
 					request.setAttribute("msg", "탈퇴한 회원입니다");
@@ -123,10 +123,9 @@ public class LoginController extends HttpServlet {
 				request.setAttribute("msg", "회원 탈퇴실패");
 				dispatch("error.jsp", request, response);
 			}
+		}else if(command.equals("boardlist")){
+			dispatch("AnsController.do?command=boardlist", request, response);
 		}
-//		else if(command.equals("boardlist")){
-//			dispatch("BoardController.do?command=boardlist", request, response);
-//		}
 		
 	}
 

@@ -9,7 +9,7 @@ public class BoardDto {
 	private String content;
 	private String email;
 	private Date regdate;
-	private String kind;
+	private String kindseq;
 	private int readcount;
 	private String enabled;
 	private int refer;
@@ -20,7 +20,7 @@ public class BoardDto {
 		super();
 	}
 
-	public BoardDto(int seq, String title, String content, String email, Date regdate, String kind, int readcount,
+	public BoardDto(int seq, String title, String content, String email, Date regdate, String kindseq, int readcount,
 			String enabled, int refer, int step, int depth) {
 		super();
 		this.seq = seq;
@@ -28,14 +28,38 @@ public class BoardDto {
 		this.content = content;
 		this.email = email;
 		this.regdate = regdate;
-		this.kind = kind;
+		this.kindseq = kindseq;
 		this.readcount = readcount;
 		this.enabled = enabled;
 		this.refer = refer;
 		this.step = step;
 		this.depth = depth;
 	}
+	
+	public BoardDto(String title, String content, String email, String kindseq) {
+		super();
+		this.title = title;
+		this.content = content;
+		this.email = email;
+		this.kindseq = kindseq;
+	}
 
+	public BoardDto(int seq, String title, String content) {
+		super();
+		this.seq = seq;
+		this.title = title;
+		this.content = content;
+	}
+	
+	public BoardDto(int seq, String title, String content, String email, String kindseq) {
+		super();
+		this.seq = seq;
+		this.title = title;
+		this.content = content;
+		this.email = email;
+		this.kindseq = kindseq;
+	}
+	
 	public int getSeq() {
 		return seq;
 	}
@@ -76,12 +100,12 @@ public class BoardDto {
 		this.regdate = regdate;
 	}
 
-	public String getKind() {
-		return kind;
+	public String getKindseq() {
+		return kindseq;
 	}
 
-	public void setKind(String kind) {
-		this.kind = kind;
+	public void setKindseq(String kindseq) {
+		this.kindseq = kindseq;
 	}
 
 	public int getReadcount() {
@@ -127,7 +151,7 @@ public class BoardDto {
 	@Override
 	public String toString() {
 		return "BoardDto [seq=" + seq + ", title=" + title + ", content=" + content + ", email=" + email + ", regdate="
-				+ regdate + ", kind=" + kind + ", readcount=" + readcount + ", enabled=" + enabled + ", refer=" + refer
+				+ regdate + ", kindseq=" + kindseq + ", readcount=" + readcount + ", enabled=" + enabled + ", refer=" + refer
 				+ ", step=" + step + ", depth=" + depth + "]";
 	}
 	

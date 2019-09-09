@@ -5,6 +5,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%request.setCharacterEncoding("utf-8"); %>
 <%response.setContentType("text/html; charset=UTF-8"); %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,6 +23,11 @@
 		
 		if(ldto == null){
 			%>
+			<c:if test="${msg != null}">
+				<script type="text/javascript">
+					alert("${msg}");
+				</script>
+			</c:if>
 			<h1>로그인</h1>
 			<form action="LoginController.do" method="post">
 				<input type="hidden" name="command" value="login" />
@@ -78,7 +84,7 @@
 		for(int i=0;i<list.size();i++){
 			if(list.get(i).getEnabled().equals("Y")){
 				%>
-				<li><a href=""><%=list.get(i).getKind()%></a></li>
+				<li><a href="BoardController.do?command=boardlist&kindseq=<%=list.get(i).getKindseq()%>&pNum=1"><%=list.get(i).getKind()%></a></li>
 				<%
 			}
 		}
