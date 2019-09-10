@@ -7,4 +7,19 @@
 		SELECT KINDSEQ, ENABLED, KIND FROM D_LIST
 	</select>
 	
+	<insert id="addlist" parameterType="ListDto">
+		INSERT INTO D_LIST VALUES (D_LIST_SEQ.NEXTVAL, #{enabled}, #{kind}, #{kindcontent})
+	</insert>
+	
+	<select id="sublist" resultType="ListDto">
+		SELECT KINDSEQ, ENABLED, KIND, KINDCONTENT FROM D_LIST
+		WHERE ENABLED = 'N'
+	</select>
+	
+	<update id="openlist" parameterType="Map">
+		UPDATE D_LIST SET ENABLED='Y' WHERE KINDSEQ IN
+		<foreach collection="kindseqs" item="kindseq" open="(" close=")" separator=",">
+			#{kindseq}
+		</foreach>
+	</update>
 </mapper>

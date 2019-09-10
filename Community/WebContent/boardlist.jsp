@@ -15,9 +15,14 @@
 	}
 	
 	$(function(){
+		$("#pmoveBtn").click(function(){
+			var pNum = $("#pmove").val();
+			location.href = "BoardController.do?command=boardlist&searchType=${searchType}&search=${search}&pNum="+pNum;
+		});
+		
 		$("#searchBtn").click(function(){
-			var searchType = document.getElementById("searchType").value;
-			var search = document.getElementById("search").value;
+			var searchType = $("#searchType").val();
+			var search = $("#search").val();
 			location.href="BoardController.do?command=boardlist&pNum=1&searchType="+searchType+"&search="+search;
 		});
 		
@@ -103,22 +108,14 @@
 			<tr>
 				<td colspan="6" align="center">
 					<a href="BoardController.do?command=boardlist&searchType=${searchType}&search=${search}&pNum=${map.prePageNum}">◀</a>
-					<c:forEach var="i" begin="1" end="${map.endPage}">
-						<c:choose>
-							<c:when test="${i == pNum}">
-								<c:out value="${i}" />
-							</c:when>
-							<c:otherwise>
-								<a href="BoardController.do?command=boardlist&searchType=${searchType}&search=${search}&pNum=${i}"><c:out value="${i}" /></a>
-							</c:otherwise>
-						</c:choose>
-					</c:forEach>
+					<input type="text" id="pmove" value="${pNum}" />
+					&nbsp;/&nbsp;${map.endPage}
 					<a href="BoardController.do?command=boardlist&searchType=${searchType}&search=${search}&pNum=${map.nextPageNum}">▶</a>
+					<input type="button" id="pmoveBtn" value="이동" />
 				</td>
 			</tr>
 		</c:otherwise>
 	</c:choose>
-	
 	<tr>
 		<td colspan="6">
 			<input type="button" value="글추가" onclick="location.href='BoardController.do?command=insertForm'" />

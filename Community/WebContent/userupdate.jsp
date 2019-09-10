@@ -13,19 +13,19 @@
 <body>
 <form action="LoginController.do">
 	<input type="hidden" name="command" value="update"/>
-	<input type="hidden" name="email" value="<%=ldto.getEmail()%>"/>
+	<input type="hidden" name="email" value="${ldto.email}"/>
 	<table border="1">
 		<tr>
 			<th>이메일</th>
-			<td><%=ldto.getEmail()%></td>
+			<td>${ldto.email}</td>
 		</tr>
 		<tr>
 			<th>닉네임</th>
-			<td><input type="text" name="nick" value="<%=ldto.getNick()%>"/></td>
+			<td><input type="text" name="nick" value="${ldto.nick}"/></td>
 		</tr>
 		<tr>
 			<th>전화번호</th>
-			<td><input type="text" name="phone" value="<%=ldto.getPhone()%>"/></td>
+			<td><input type="text" name="phone" value="${ldto.phone}"/></td>
 		</tr>
 		<tr>
 			<td colspan="2" align="right">

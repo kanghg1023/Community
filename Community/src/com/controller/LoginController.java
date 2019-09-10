@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.daos.ListDao;
 import com.daos.UserDao;
+import com.dtos.ListDto;
 import com.dtos.UserDto;
 
 
@@ -34,8 +36,12 @@ public class LoginController extends HttpServlet {
 		String command = request.getParameter("command");
 		
 		UserDao dao = new UserDao();
-		
-		if(command.equals("regist")){
+		if(command.equals("index")){
+			ListDao listdao = new ListDao();
+			List<ListDto> blist = listdao.listlist();
+			request.setAttribute("blist", blist);
+			dispatch("main.jsp", request, response);
+		}else if(command.equals("regist")){
 			response.sendRedirect("regist.jsp");
 		}else if(command.equals("insertuser")){ //회원가입
 			String email = request.getParameter("email");
@@ -46,7 +52,7 @@ public class LoginController extends HttpServlet {
 			boolean isS = dao.insertUser(new UserDto(email,password,nick,phone,null,null));
 			
 			if(isS){
-				jsForward("index.jsp", "회원가입을 축하합니다.!!!", response);
+				jsForward("LoginController.do?command=index", "회원가입을 축하합니다.!!!", response);
 			}else{
 				request.setAttribute("msg", "회원가입 실패");
 				dispatch("error.jsp", request, response);
@@ -58,7 +64,7 @@ public class LoginController extends HttpServlet {
 			UserDto ldto = dao.getLogin(email,password);
 			if(ldto == null || ldto.getEmail()==null){
 				request.setAttribute("msg", "아이디나 패스워드를 확인하세요");
-				dispatch("index.jsp", request, response);
+				dispatch("LoginController.do?command=index", request, response);
 			}else{
 				if(ldto.getEnabled().equals("N")){
 					request.setAttribute("msg", "탈퇴한 회원입니다");
@@ -67,12 +73,12 @@ public class LoginController extends HttpServlet {
 					session.setAttribute("ldto", ldto); //세션삽입
 					session.setMaxInactiveInterval(10*60*1000);//10분간 요청이 없으면 세션을 삭제
 					
-					response.sendRedirect("index.jsp");
+					response.sendRedirect("LoginController.do?command=index");
 				}
 			}
 		}else if(command.equals("logout")){
 			session.invalidate(); //세션지우기
-			response.sendRedirect("index.jsp");
+			response.sendRedirect("LoginController.do?command=index");
 		}else if(command.equals("emailChk")){
 			String email = request.getParameter("email");
 			UserDto dto = dao.emailChk(email);
@@ -92,11 +98,24 @@ public class LoginController extends HttpServlet {
 			boolean isS = dao.authchange(email, role);
 			if(isS){
 				jsForward("LoginController.do?command=alluserlist","회원등급을 수정했습니다.",response);
+			}else{
+				request.setAttribute("msg", "회원등급 변경실패");
+				dispatch("error.jsp", request, response);
 			}
-//			else{
-//				request.setAttribute("msg", "회원등급 변경실패");
-//				dispatch("error.jsp", request, response);
-//			}
+		}else if(command.equals("useroutfrom")){
+			String email = request.getParameter("email");
+			UserDto dto = dao.getInfo(email);
+			request.setAttribute("dto", dto);
+			dispatch("useroutfrom.jsp", request, response);
+		}else if(command.equals("userout")){
+			String email = request.getParameter("email");
+			boolean isS = dao.withdraw(email);
+			if(isS){
+				jsForward("LoginController.do?command=alluserlist","강제 탈퇴되었습니다.",response);
+			}else{
+				request.setAttribute("msg", "강제 탈퇴실패");
+				dispatch("error.jsp", request, response);
+			}
 		}else if(command.equals("userinfo")){
 			response.sendRedirect("user_info.jsp");
 		}else if(command.equals("userUpdate")){
