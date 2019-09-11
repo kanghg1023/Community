@@ -9,6 +9,9 @@ public class UserDto {
 	private String enabled;
 	private String role;
 	
+	
+	
+	
 	public UserDto() {
 		super();
 	}
@@ -22,6 +25,8 @@ public class UserDto {
 		this.enabled = enabled;
 		this.role = role;
 	}
+
+	
 	
 	public UserDto(String email, String nick, String phone) {
 		super();

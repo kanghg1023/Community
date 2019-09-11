@@ -70,6 +70,9 @@ public class BoardController extends HttpServlet {
 					pcount = dao.pageMaxSearchTitle(kindseq,search);
 				}else {
 					String email = dao.nickEmail(search);
+					if(email == null) {
+						email = "";
+					}
 					list = dao.searchEmail(email,kindseq,pNum);
 					pcount = dao.pageMaxSearchEmail(kindseq,email);
 				}
