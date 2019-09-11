@@ -9,6 +9,7 @@ public class Util extends SqlMapConfig {
 	private String arrowNbsp; //depth의 크기만큼 공백
 	private String emailNick; //이메일을 닉네임으로
 	
+	
 	public String getEmailNick() {
 		return emailNick;
 	}

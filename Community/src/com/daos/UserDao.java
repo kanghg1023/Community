@@ -58,7 +58,7 @@ public class UserDao extends SqlMapConfig {
 	}
 	
 	//이메일 중복체크
-	public UserDto emailChk(String email) {
+	public boolean emailChk(String email) {
 		UserDto dto = new UserDto();
 		
 		SqlSession sqlSession = null;
@@ -72,7 +72,25 @@ public class UserDao extends SqlMapConfig {
 			sqlSession.close();
 		}
 		
-		return dto;
+		return dto != null ? true : false;
+	}
+	
+	//닉네임 중복확인
+	public boolean nickChk(String nick) {
+		UserDto dto = new UserDto();
+		
+		SqlSession sqlSession = null;
+		
+		try {
+			sqlSession = getSqlSessionFactory().openSession(true);
+			dto = sqlSession.selectOne(nameSpace+"nickChk", nick);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			sqlSession.close();
+		}
+		
+		return dto != null ? true : false;
 	}
 	
 	public List<UserDto> getAllUserStatus(){

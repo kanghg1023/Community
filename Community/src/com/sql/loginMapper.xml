@@ -27,6 +27,10 @@
 		SELECT EMAIL FROM D_USER WHERE EMAIL=#{email}
 	</select>
 	
+	<select id="nickChk" parameterType="String" resultType="UserDto">
+		SELECT NICK FROM D_USER WHERE NICK=#{nick}
+	</select>
+	
 <!-- 	전체 회원 조회 (탈퇴O) -->
 	<select id="getAllUserStatus" resultType="UserDto">
 		<include refid="a"></include>
