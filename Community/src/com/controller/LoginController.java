@@ -81,9 +81,14 @@ public class LoginController extends HttpServlet {
 			response.sendRedirect("LoginController.do?command=index");
 		}else if(command.equals("emailChk")){
 			String email = request.getParameter("email");
-			UserDto dto = dao.emailChk(email);
-			request.setAttribute("dto", dto);
-			dispatch("emailchkform.jsp", request, response); //여기부터
+			boolean isS = dao.emailChk(email);
+			PrintWriter pw = response.getWriter();
+			pw.print(isS);
+		}else if(command.equals("nickChk")){
+			String nick = request.getParameter("nick");
+			boolean isS = dao.nickChk(nick);
+			PrintWriter pw = response.getWriter();
+			pw.print(isS);
 		}else if(command.equals("alluserstatus")){
 			List<UserDto> list = dao.getAllUserStatus();
 			request.setAttribute("list", list);

@@ -10,18 +10,17 @@
 <script type="text/javascript">
 	$(function(){
 		$("form").submit(function(){
-			var title = $(this).find("input[name=title]");
-			if(title.val().length == 0){
-				alert("제목을 입력하시오");
-				title.focus();
-				return false;
-			}
-			var content = $(this).find("textarea[name=content]");
-			if(content.val().length == 0){
-				alert("내용을 입력하시오");
-				content.focus();
-				return false;
-			}
+			var bool = true;
+			var input = $(this).find("td").children().filter("[name]");
+			input.each(function(i){
+				if($(this).val()==""){
+					alert($(this).parent().prev().text()+"를 입력하세요");
+					$(this).focus();
+					bool = false;
+					return false;
+				}
+			});
+			return bool;
 		});
 	});
 </script>
