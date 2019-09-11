@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.like">
+	
+	<select id="getLike" parameterType="LikeDto" resultType="LikeDto">
+		SELECT EMAIL FROM D_LIKE WHERE EMAIL=#{email} AND SEQ=#{seq}
+	</select>
+	
+	<select id="likeCount" parameterType="String" resultType="int">
+		SELECT COUNT(EMAIL) FROM D_LIKE WHERE SEQ=#{seq}
+	</select>
+	
+	<insert id="insertLike" parameterType="LikeDto">
+		INSERT INTO D_LIKE VALUES (#{email},#{seq})
+	</insert>
+	
+	<delete id="deleteLike" parameterType="LikeDto">
+		DELETE FROM D_LIKE WHERE EMAIL=#{email} AND SEQ=#{seq}
+	</delete>
+</mapper>

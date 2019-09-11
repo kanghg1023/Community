@@ -1,6 +1,7 @@
 package com.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
@@ -12,7 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.daos.BoardDao;
+import com.daos.LikeDao;
 import com.dtos.BoardDto;
+import com.dtos.LikeDto;
 import com.dtos.UserDto;
 import com.utils.Paging;
 
@@ -32,8 +35,10 @@ public class BoardController extends HttpServlet {
 		
 		String command=request.getParameter("command");
 		
-		BoardDao dao = new BoardDao();
+		
 		HttpSession session = request.getSession();
+		BoardDao dao = new BoardDao();
+		LikeDao likedao = new LikeDao();
 		UserDto ldto = (UserDto)session.getAttribute("ldto");
 		
 		if(command.equals("boardlist")) { //목록보기
@@ -111,8 +116,14 @@ public class BoardController extends HttpServlet {
 				dao.readCount(seq);
 				session.setAttribute("readcount", seq);
 			}
-			
+			if(ldto != null) {
+				boolean like = likedao.getLike(new LikeDto(ldto.getEmail(),seq));
+				request.setAttribute("like", like);
+			}
+			int likecount = likedao.likeCount(seq);
 			BoardDto dto = dao.getBoard(kindseq,seq);
+			
+			request.setAttribute("likecount", likecount);
 			request.setAttribute("dto", dto);
 			dispatch("boarddetail.jsp", request, response);
 		}else if(command.equals("muldel")) { //삭제
@@ -156,8 +167,33 @@ public class BoardController extends HttpServlet {
 				request.setAttribute("msg", "답글달기 실패");
 				dispatch("error.jsp",request,response);
 			}
-		}else if(command.equals("")) {
+		}else if(command.equals("likechange")) {
+			String seq = request.getParameter("seq");
+			LikeDto dto = new LikeDto(ldto.getEmail(),seq);
+			boolean like = likedao.getLike(dto);
+			if(like) {
+				//좋아요 삭제
+				boolean isS = likedao.deleteLike(dto);
+				if(isS) {
+					like = false;
+				}else {
+					request.setAttribute("msg", "좋아요 삭제 실패");
+					dispatch("error.jsp",request,response);
+				}
+			}else {
+				//좋아요 추가
+				boolean isS = likedao.insertLike(dto);
+				if(isS) {
+					like = true;
+				}else {
+					request.setAttribute("msg", "좋아요 추가 실패");
+					dispatch("error.jsp",request,response);
+				}
+			}
+			int likecount = likedao.likeCount(seq);
 			
+			PrintWriter pw = response.getWriter();
+			pw.print(like+","+likecount);
 		}else if(command.equals("")) {
 			
 		}else if(command.equals("")) {

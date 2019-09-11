@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.config.SqlMapConfig;
 import com.dtos.BoardDto;
+import com.dtos.LikeDto;
 
 public class BoardDao extends SqlMapConfig {
 	
@@ -77,6 +78,8 @@ private String nameSpace = "com.board.";
 		
 		return dto;
 	}
+	
+	
 	
 	//글 수정하기(title,content 전달받음)
 	public boolean updateBoard(BoardDto dto) {
