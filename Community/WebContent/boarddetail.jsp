@@ -32,6 +32,29 @@
 			},1000);
 		});
 		
+		$("#like").click(function(){
+			var aCount = $(this);
+			
+			$.ajax({
+				url:"BoardController.do",
+				data:{"command":"likechange","seq":"${dto.seq}"},
+				method:"post",
+				datatype:"text",
+				async:false, // t=비동기 (되는대로 실행) / f=동기 (순서대로 실행)
+				success:function(likechange){
+					var a = likechange.split(",");
+					if(eval(a[0])){
+						aCount.val("<img alt='좋아요' src='img/heart1.png'>a[1]");
+					}else {
+						aCount.val("<img alt='좋아요' src='img/heart2.png'>a[1]");
+					}
+				},
+				error:function(){
+					alert("서버통신실패!!");
+				}
+			});
+		});
+		
 		$("form").submit(function(){
 			var title = $(this).find("input[name=title]");
 			if(title.val().length == 0){
@@ -74,8 +97,8 @@
 		<td><textarea rows="10" cols="60" readonly="readonly">${dto.content}</textarea></td>
 	</tr>
 	<tr>
-		<td colspan="2">
-			<c:if test="${ldto.email != null}">
+		<td colspan="2" align="left">
+			<c:if test="${ldto != null}">
 				<button id="reply">답글</button>
 			</c:if>
 			<c:if test="${dto.email == ldto.email}">
@@ -83,6 +106,15 @@
 				<button onclick="location.href='BoardController.do?command=muldel&chk=${dto.seq}'">삭제</button>
 			</c:if>
 			<button onclick="location.href='BoardController.do?command=boardlist'">목록</button>
+			<c:choose>
+				<c:when test="${ldto != null}">
+					<a href="" id="like"><img alt="좋아요" src="img/heart${like ? '2' : '1'}.png">${likecount}</a>
+				</c:when>
+				<c:otherwise>
+					<img alt="좋아요" src="img/heart1.png">${likecount}
+				</c:otherwise>
+			</c:choose>
+			
 		</td>
 	</tr>
 </table>

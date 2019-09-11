@@ -3,13 +3,13 @@ package com.dtos;
 public class LikeDto {
 
 	private String email;
-	private int seq;
+	private String seq;
 	
 	public LikeDto() {
 		super();
 	}
 
-	public LikeDto(String email, int seq) {
+	public LikeDto(String email, String seq) {
 		super();
 		this.email = email;
 		this.seq = seq;
@@ -23,11 +23,11 @@ public class LikeDto {
 		this.email = email;
 	}
 
-	public int getSeq() {
+	public String getSeq() {
 		return seq;
 	}
 
-	public void setSeq(int seq) {
+	public void setSeq(String seq) {
 		this.seq = seq;
 	}
 
