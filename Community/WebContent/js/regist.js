@@ -12,7 +12,7 @@ var phoneChk;
 function emailChkfun(){
 	var aCount = $("#email");
 	var email = aCount.val();
-	var regexEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+	var regexEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/g;
 	aCount.next("div").remove();
 	
 	if(email==""){
@@ -119,7 +119,7 @@ function nickChkfun(){
 function phoneChkfun(){
 	var aCount = $("#phone");
 	var phone = aCount.val();
-	var regexPhone = /[0-9]{3,11}/;
+	var regexPhone = /^[0-9]{3,11}$/g;
 	
 	aCount.next("div").remove();
 	
