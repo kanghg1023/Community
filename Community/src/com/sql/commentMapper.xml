@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.comment">
+	
+	<select id="commentList" parameterType="String" resultType="CommentDto">
+		SELECT ROW_NUMBER() OVER (ORDER BY REFER DESC, STEP) AS RN,
+		RESEQ, SEQ, CONTENT, EMAIL, REGDATE, REFER, STEP, DEPTH
+		FROM D_COMMENT
+		WHERE SEQ=#{seq}
+	</select>
+	
+	<insert id="addcomment" parameterType="CommentDto">
+		INSERT INTO D_COMMENT
+		VALUES(D_COMMENT_SEQ.NEXTVAL, #{seq}, #{content}, #{email}, SYSDATE,
+		(SELECT NVL(MAX(REFER)+1,0) FROM D_COMMENT), 0, 0)
+	</insert>
+	
+	<insert id="recomment" parameterType="CommentDto">
+		INSERT INTO D_COMMENT
+		VALUES(D_COMMENT_SEQ.NEXTVAL, #{seq}, #{content}, #{email}, SYSDATE,
+		(SELECT REFER FROM D_COMMENT WHERE RESEQ=#{reseq}),
+		((SELECT STEP FROM D_COMMENT WHERE RESEQ=#{reseq})+1),
+		((SELECT DEPTH FROM D_COMMENT WHERE RESEQ=#{reseq})+1))
+	</insert>
+	
+	<delete id="delcomment" parameterType="int">
+		DELETE FROM D_COMMENT WHERE RESEQ=#{reseq}
+	</delete>
+</mapper>

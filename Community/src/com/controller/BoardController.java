@@ -13,8 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.daos.BoardDao;
+import com.daos.CommentDao;
 import com.daos.LikeDao;
 import com.dtos.BoardDto;
+import com.dtos.CommentDto;
 import com.dtos.LikeDto;
 import com.dtos.UserDto;
 import com.utils.Paging;
@@ -40,6 +42,7 @@ public class BoardController extends HttpServlet {
 		BoardDao dao = new BoardDao();
 		LikeDao likedao = new LikeDao();
 		UserDto ldto = (UserDto)session.getAttribute("ldto");
+		CommentDao cdao = new CommentDao();
 		
 		if(command.equals("boardlist")) { //목록보기
 			//조회수 세션 삭제
@@ -123,6 +126,9 @@ public class BoardController extends HttpServlet {
 			int likecount = likedao.likeCount(seq);
 			BoardDto dto = dao.getBoard(kindseq,seq);
 			
+			List<CommentDto> clist = cdao.commentList(seq);
+			
+			request.setAttribute("clist", clist);
 			request.setAttribute("likecount", likecount);
 			request.setAttribute("dto", dto);
 			dispatch("boarddetail.jsp", request, response);
@@ -153,6 +159,10 @@ public class BoardController extends HttpServlet {
 				request.setAttribute("msg", "글수정 실패");
 				dispatch("error.jsp",request,response);
 			}
+		}else if(command.equals("replyForm")) {
+			String seq = request.getParameter("seq");
+			request.setAttribute("seq", seq);
+			dispatch("replyboard.jsp", request, response);
 		}else if(command.equals("replyboard")) {
 			int seq = Integer.parseInt(request.getParameter("seq"));
 			String title = request.getParameter("title");
@@ -194,11 +204,51 @@ public class BoardController extends HttpServlet {
 			
 			PrintWriter pw = response.getWriter();
 			pw.print(like+","+likecount);
-		}else if(command.equals("")) {
+		}else if(command.equals("addcomment")) {
+			int seq = Integer.parseInt(request.getParameter("seq"));
+			String content = request.getParameter("content");
+			String email = ldto.getEmail();
+//			addcomment
+			boolean isS = cdao.addcomment(new CommentDto(0,seq,content,email));
 			
-		}else if(command.equals("")) {
+			if(isS) {
+				request.setAttribute("seq", seq);
+				dispatch("BoardController.do?command=boarddetail", request, response);
+			}else {
+				request.setAttribute("msg", "댓글달기 실패");
+				dispatch("error.jsp",request,response);
+			}
+		}else if(command.equals("recomment")) {
+			int reseq = Integer.parseInt(request.getParameter("reseq"));
+			int seq = Integer.parseInt(request.getParameter("seq"));
+			String content = request.getParameter("content");
+			String email = ldto.getEmail();
 			
+			boolean isS = cdao.recomment(new CommentDto(reseq,seq,content,email));
+			
+			if(isS) {
+				request.setAttribute("seq", seq);
+				dispatch("BoardController.do?command=boarddetail", request, response);
+			}else {
+				request.setAttribute("msg", "대댓글달기 실패");
+				dispatch("error.jsp",request,response);
+			}
 		}
+		else if(command.equals("delcomment")) {
+			int reseq = Integer.parseInt(request.getParameter("reseq"));
+			int seq = Integer.parseInt(request.getParameter("seq"));
+			
+			boolean isS = cdao.delcomment(reseq);
+			
+			if(isS) {
+				request.setAttribute("seq", seq);
+				dispatch("BoardController.do?command=boarddetail", request, response);
+			}else {
+				request.setAttribute("msg", "댓글삭제 실패");
+				dispatch("error.jsp",request,response);
+			}
+		}
+		
 	}//doPost
 	
 	//RequestDispatcher 객체를 구해서 forward()할 수 있도록 구현한 메소드

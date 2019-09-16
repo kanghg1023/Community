@@ -28,6 +28,14 @@ public class CommentDto {
 		this.step = step;
 		this.depth = depth;
 	}
+	
+	public CommentDto(int reseq, int seq, String content, String email) {
+		super();
+		this.reseq = reseq;
+		this.seq = seq;
+		this.content = content;
+		this.email = email;
+	}
 
 	public int getReseq() {
 		return reseq;

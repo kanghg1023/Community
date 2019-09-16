@@ -2,6 +2,7 @@
 <%request.setCharacterEncoding("utf-8"); %>
 <%response.setContentType("text/html; charset=UTF-8"); %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,28 +10,82 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <title></title>
 <style type="text/css">
-	#replyForm {display: none;}
+	#commentForm {display: none;}
+	.recomment {display: none;}
 	#container {
 		height: 400px;
 		width: 600px;
 		border: 1px solid red;
 		overflow: auto;
 	}
+	img{width: 12px; height: 12px;}
+	
 </style>
 <script type="text/javascript">
-		
-	function replyForm2(){
-		$("#replyForm").hide(1000);
+	function delcomment(reseq){
+		location.href="BoardController.do?command=delcomment&reseq="+reseq+"&seq=${dto.seq}";
 	}
 	
 	$(function(){
-		$("#reply").click(function(){
-			$("#replyForm").toggle(1000);
-			var replyPosition = $("#replyForm").offset().top;
+		$("#commentBtn").click(function(){
+			$("#commentForm").toggle(1000);
+			var replyPosition = $("#commentForm").offset().top;
 			$("#container").animate({
 				"scrollTop":replyPosition
 			},1000);
 		});
+		
+		var reseq;
+		
+// 		$("td").off().on("click",".cancelBtn",function(){
+// 			$("#recomment").remove();
+// 			$(this).attr('class','recommentForm');
+// 		});
+		
+		$(".recommentForm").click(function(event){
+			var className=$(this).attr("class");
+			if(className=="cancelBtn"){
+				$("#recomment").remove();
+	 			$(this).attr('class','recommentForm');
+			}else{
+				$("#recomment").remove();
+				reseq = $(this).val();
+				var aCount = $(this).parent().parent().next();
+				aCount.after("<tr id='recomment'>"+
+						"<td></td>"+
+						"<td><textarea rows='2' cols='55' id='content2' ></textarea>"+
+						"<input type='button' id='recommentBtn' value='등록' />"+
+						"</td></tr>");
+				$(this).attr('class','cancelBtn');
+				
+			}
+			
+		});
+		
+		
+// 		$(".cancelBtn").click(function(){
+// 			alert("ddd");
+// 			$("#recomment").remove();
+// 			$(this).attr('class','recommentForm');
+// 		});
+// 		$("td").off().on("click",".cancelBtn",function(){
+// 			$("#recomment").remove();
+// 			$(this).attr('class','recommentForm');
+// 		});
+		
+		$("body").on("click","#recommentBtn",function(){
+			var content = $("#content2").val();
+			location.href="BoardController.do?command=recomment&seq=${dto.seq}&reseq="+reseq+"&content="+content;
+		});
+		
+// 		$("#recommentBtn").click(function(){
+// 			var content = $("#content2").val();
+// 			location.href="BoardController.do?command=recomment&seq=${dto.seq}&reseq="+reseq+"&content="+content;
+// 		});
+		
+// 		$("#delcomment").click(function(){
+// 			location.href="BoardController.do?command=recomment&seq=${seq}";
+// 		});
 		
 		$("#like").click(function(){
 			var aCount = $(this);
@@ -56,12 +111,6 @@
 		});
 		
 		$("form").submit(function(){
-			var title = $(this).find("input[name=title]");
-			if(title.val().length == 0){
-				alert("제목을 입력하시오");
-				title.focus();
-				return false;
-			}
 			var content = $(this).find("textarea[name=content]");
 			if(content.val().length == 0){
 				alert("내용을 입력하시오");
@@ -98,8 +147,9 @@
 	</tr>
 	<tr>
 		<td colspan="2" align="left">
+			<button id="commentBtn">댓글</button>
 			<c:if test="${ldto != null}">
-				<button id="reply">답글</button>
+				<button onclick="location.href='BoardController.do?command=replyForm&seq=${dto.seq}'">답글</button>
 			</c:if>
 			<c:if test="${dto.email == ldto.email}">
 				<button onclick="location.href='BoardController.do?command=updateForm&seq=${dto.seq}'">수정</button>
@@ -118,27 +168,47 @@
 		</td>
 	</tr>
 </table>
-<div id="replyForm">
-	<h1>답글달기</h1>
+<div id="commentForm">
 	<form action="BoardController.do" method="post">
-	<input type="hidden" name="command" value="replyboard" />
-	<input type="hidden" name="seq" value="${dto.seq}" />
-	<table border="1">
-		<tr>
-			<th>제목</th>
-			<td><input type="text" name="title" /></td>
-		</tr>
-		<tr>
-			<th>내용</th>
-			<td><textarea rows="10" cols="60" name="content" ></textarea></td>
-		</tr>
-		<tr>
-			<td colspan="2">
-				<input type="submit" value="완료" />
-				<input type="button" value="취소" onclick="replyForm2()" />
-			</td>
-		</tr>
-	</table>
+		<input type="hidden" name="command" value="addcomment" />
+		<input type="hidden" name="seq" value="${dto.seq}" />
+		<c:if test="${ldto != null || clist != null}">
+			<table border="1">
+				<c:if test="${clist != null}">
+					<c:forEach items="${clist}" var="cdto">
+					<tr>
+						<c:if test="${cdto.depth > 0}">
+							<td rowspan="2"><img src="img/arrow.png" alt="답글" /></td>
+						</c:if>
+						<th>
+							<jsp:setProperty property="emailNick" name="util" value="${cdto.email}" />
+							<jsp:getProperty property="emailNick" name="util" />
+						</th>
+						<td>
+							<fmt:formatDate value="${cdto.regdate}" pattern="yyyy-MM-dd"/>
+							<c:if test="${ldto != null}">
+								<button type="button" class="recommentForm" value="${cdto.reseq}">답글</button>
+							</c:if>
+							<c:if test="${cdto.email eq ldto.email}">
+								<button type="button" onclick="delcomment(${cdto.reseq})">삭제</button>
+							</c:if>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="3">${cdto.content}</td>
+					</tr>
+					</c:forEach>
+				</c:if>
+				<c:if test="${ldto != null}">
+					<tr>
+						<td colspan="3">
+							<textarea rows="2" cols="60" name="content" ></textarea>
+							<input type="submit" value="등록" />
+						</td>
+					</tr>
+				</c:if>
+			</table>
+		</c:if>
 	</form>
 </div>
 </div>
