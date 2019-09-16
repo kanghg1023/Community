@@ -49,7 +49,11 @@
 <body>
 	<jsp:include page="header.jsp" />
 	<jsp:useBean id="util" class="com.utils.Util" />
-	<h1>게시판 목록</h1>
+	<h1>
+		<jsp:setProperty property="kindchange" name="util" value="${kindseq}" />
+		<jsp:getProperty property="kindchange" name="util" />
+		갤러리
+	</h1>
 	<form action="BoardController.do" method="post">
 		<input type="hidden" name="command" value="muldel" />
 		<div id="container">
