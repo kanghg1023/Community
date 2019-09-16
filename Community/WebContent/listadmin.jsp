@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <title></title>
+<link rel="stylesheet" href="css/listadmin.css">
 <script type="text/javascript">
 	function allSel(ele){
 		$("input[name=chk]").prop("checked",$(ele).prop("checked"));
@@ -16,9 +17,11 @@
 </head>
 <body>
 <jsp:include page="header.jsp" />
+<div id="container">
+<h2>개설 대기중인 갤러리</h2>
 <form action="ListController.do" method="post">
 <input type="hidden" name="command" value="openlist" />
-<table border="1">
+<table border="1" class="table">
 	<tr>
 		<th><input type="checkbox" name="all" onclick="allSel(this)" /></th>
 		<th>게시판 제목</th>
@@ -28,14 +31,14 @@
 		<c:when test="${blist != null}">
 			<c:forEach items="${blist}" var="list">
 				<tr>
-					<td><input type="checkbox" name="chk" value="${list.kindseq}"></td>
-					<td>${list.kind}</td>
-					<td>${list.kindcontent}</td>
+					<td id="chk"><input type="checkbox" name="chk" value="${list.kindseq}"></td>
+					<td id="kind">${list.kind}</td>
+					<td id="kc">${list.kindcontent}</td>
 				</tr>
 			</c:forEach>
 			<tr>
 				<td colspan="3" align="right">
-					<input type="submit" value="게시판 개설" />
+					<input type="submit" value="게시판 개설" class="button" />
 				</td>
 			</tr>
 		</c:when>
@@ -47,6 +50,7 @@
 	</c:choose>
 </table>
 </form>
-<ul><li><a href="ListController.do?command=addlistfrom">게시판 추가하기</a></li></ul>
+<a href="ListController.do?command=addlistfrom" title="바로 추가">[게시판 추가하기]</a>
+</div>
 </body>
 </html>

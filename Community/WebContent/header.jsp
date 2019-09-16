@@ -12,7 +12,8 @@
 <%
 	UserDto ldto = (UserDto)session.getAttribute("ldto");
 %>
-	<a href="index.jsp">메인메뉴</a>
+	<a href="index.jsp"><img src="img/head_logo.jpg"
+				alt="메인메뉴" /></a>
 <hr />
 </body>
 </html>

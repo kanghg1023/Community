@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <title></title>
+<link rel="stylesheet" href="css/updateboard.css">
 <script type="text/javascript">
 
 	$(function(){
@@ -43,28 +44,29 @@
 </head>
 <body>
 <jsp:useBean id="util" class="com.utils.Util" />
+<div id="container">
 <h1>게시글 수정하기</h1>
 <form action="BoardController.do">
 <input type="hidden" name="command" value="updateboard" />
 <input type="hidden" name="seq" value="${dto.seq}" />
-<table border="1">
+<table border="1" class="table">
 	<tr>
 		<th>작성자</th>
-		<td>
+		<td id="nick">
 			<jsp:setProperty property="emailNick" name="util" value="${dto.email}" />
 			<jsp:getProperty property="emailNick" name="util" />
 		</td>
 	</tr>
 	<tr>
 		<th>제목</th>
-		<td><input type="text" name="title" value="${dto.title}" /></td>
+		<td id="title"><input type="text" name="title" value="${dto.title}" /></td>
 	</tr>
 	<tr>
 		<th>내용</th>
 		<td><textarea rows="10" cols="60" name="content">${dto.content}</textarea></td>
 	</tr>
 	<tr>
-		<td colspan="2">
+		<td colspan="2" id="btn">
 			<input type="submit" value="수정완료" />
 			<input type="button" onclick="location.href='BoardController.do?command=muldel&chk=${dto.seq}'" value="삭제" />
 			<input type="button" onclick="location.href='BoardController.do?command=boarddetail&seq=${dto.seq}'" value="취소" />
@@ -73,5 +75,6 @@
 	</tr>
 </table>
 </form>
+</div>
 </body>
 </html>

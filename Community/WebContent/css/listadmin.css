@@ -1,0 +1,75 @@
+charset "UTF-8";
+
+#container {
+	width: 100%;
+	align-content: center;
+}
+
+.table {
+	border-collapse: collapse;
+    text-align: left;
+    line-height: 1.5;
+    border-top: 1px solid #ccc;
+    border-left: 3px solid #369;
+  	margin : 20px 10px;
+	display: inline-block;
+}
+
+.table th {
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+    color: #153d73;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+}
+
+#chk {
+	width: 35px;
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+    color: #153d73;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+}
+
+#kind {
+	width: 200px;
+    padding: 10px;
+    vertical-align: top;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+}
+
+#kc {
+	width: 500px;
+    padding: 10px;
+    vertical-align: top;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+}
+
+a {
+	text-decoration: none;
+	color: green;
+}
+
+.button {
+	width:140px;
+    background-color: #000040;
+    border: none;
+    color:#fff;
+    padding: 7px 0;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px;
+    cursor: pointer;
+    border-radius:10px;
+}

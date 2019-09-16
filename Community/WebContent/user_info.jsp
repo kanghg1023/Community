@@ -9,10 +9,12 @@
 <head>
 <meta charset="UTF-8">
 <title>내 정보보기</title>
+<link rel="stylesheet" href="css/user_info.css">
 </head>
 <body>
-<h1>내 정보보기</h1>
-<table border="1">
+<div id="container">
+<h2>내 정보보기</h2>
+<table border="1" class="table">
 	<tr>
 		<th>이메일</th>
 		<td>${ldto.email}</td>
@@ -36,5 +38,6 @@
 		</td>
 	</tr>
 </table>
+</div>
 </body>
 </html>

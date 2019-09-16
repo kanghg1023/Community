@@ -42,7 +42,7 @@ public class Util extends SqlMapConfig {
 			nbsp += "&nbsp;&nbsp;&nbsp;";
 		}
 		//					답글이면 nbsp+<img> 출력, 부모글이면 ""
-		this.arrowNbsp = depthInt>0 ? nbsp+"<img src='img/arrow.png' alt='답글' />" : "";
+		this.arrowNbsp = depthInt>0 ? nbsp+"<img src='img/arrow.jpg' alt='답글' />" : "";
 	}
 	
 }

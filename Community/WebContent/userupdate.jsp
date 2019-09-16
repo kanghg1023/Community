@@ -9,12 +9,15 @@
 <head>
 <meta charset="UTF-8">
 <title>정보수정하기</title>
+<link rel="stylesheet" href="css/userupdate.css">
 </head>
 <body>
+<div id="container">
+<h2>내 정보 수정</h2>
 <form action="LoginController.do">
 	<input type="hidden" name="command" value="update"/>
 	<input type="hidden" name="email" value="${ldto.email}"/>
-	<table border="1">
+	<table border="1" class="table">
 		<tr>
 			<th>이메일</th>
 			<td>${ldto.email}</td>
@@ -29,10 +32,11 @@
 		</tr>
 		<tr>
 			<td colspan="2" align="right">
-				<input type="submit" value="정보수정"/>
+				<input type="submit" value="정보수정" class="button"/>
 			</td>
 		</tr>
 	</table>
 </form>
+</div>
 </body>
 </html>

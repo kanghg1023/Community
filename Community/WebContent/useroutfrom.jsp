@@ -8,13 +8,15 @@
 <head>
 <meta charset="UTF-8">
 <title></title>
+<link rel="stylesheet" href="css/useroutfrom.css">
 </head>
 <body>
-<h1>등급변경</h1>
+<div id="container">
+<h3>아래 회원을 강제 탈퇴 시키시겠습니까?</h3>
 <form action="LoginController.do" method="post">
 	<input type="hidden" name="command" value="userout" />
 	<input type="hidden" name="email" value="${dto.email}" />
-	<table border="1">
+	<table border="1" class="table">
 		<tr>
 			<th>아이디</th>
 			<td>${dto.email}</td>
@@ -42,11 +44,12 @@
 		<c:if test="${dto.role != 'ADMIN'}">
 			<tr>
 				<td colspan="2">
-					<input type="submit" value="강제탈퇴" />
+					<input type="submit" value="강제탈퇴" class="button"/>
 				</td>
 			</tr>
 		</c:if>
 	</table>
 </form>
+</div>
 </body>
 </html>

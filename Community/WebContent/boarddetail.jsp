@@ -178,7 +178,7 @@
 					<c:forEach items="${clist}" var="cdto">
 					<tr>
 						<c:if test="${cdto.depth > 0}">
-							<td rowspan="2"><img src="img/arrow.png" alt="답글" /></td>
+							<td rowspan="2"><img src="img/arrow.jpg" alt="답글" /></td>
 						</c:if>
 						<th>
 							<jsp:setProperty property="emailNick" name="util" value="${cdto.email}" />

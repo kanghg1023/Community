@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%@include file="header.jsp" %>
 <%request.setCharacterEncoding("utf-8"); %>
 <%response.setContentType("text/html; charset=UTF-8"); %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -8,6 +9,7 @@
 <meta charset="UTF-8">
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <title></title>
+<link rel="stylesheet" href="css/addlistfrom.css">
 <script type="text/javascript">
 	$(function(){
 		$("form").submit(function(){
@@ -22,12 +24,13 @@
 </script>
 </head>
 <body>
+<div id="container">
 <c:choose>
 	<c:when test="${ldto.role eq 'ADMIN'}">
-		<h1>게시판 추가하기</h1>
+		<h2>게시판 추가하기</h2>
 	</c:when>
 	<c:otherwise>
-		<h1>게시판 신청하기</h1>
+		<h2>게시판 신청하기</h2>
 	</c:otherwise>
 </c:choose>
 <form action="ListController.do" method="post">
@@ -40,21 +43,22 @@
 			<input type="hidden" name="enabled" value="N" />
 		</c:otherwise>
 	</c:choose>
-	<table border="1">
+	<table border="1" class="table">
 		<tr>
 			<th>게시판 제목</th>
-			<td><input type="text" name="kind" /></td>
+			<td id="kind"><input type="text" name="kind"/></td>
 		</tr>
 		<tr>
-			<th>게시판 소개</th>
+			<th class="intro">게시판 소개</th>
 			<td><textarea rows="10" cols="60" name="kindcontent"></textarea></td>
 		</tr>
 		<tr>
 			<td colspan="2">
-				<input type="submit" value="완료" />
+				<input type="submit" value="완료" class="button"/>
 			</td>
 		</tr>
 	</table>
 </form>
+</div>
 </body>
 </html>

@@ -21,7 +21,7 @@
 		<!-- 상단 로고 -->
 		<div id="logo">
 			<a href="index.jsp"> <img src="img/logo.png"
-				alt="Inside Not Outside" />
+				alt="홈" />
 			</a>
 		</div>
 		<!-- LoginController.do -->
