@@ -89,6 +89,7 @@ public class BoardController extends HttpServlet {
 			}
 			Map<String,Integer> map = Paging.pagingValue(pcount, pNum, 5);
 			
+			request.setAttribute("kindseq", kindseq);
 			request.setAttribute("map", map);
 			request.setAttribute("list", list);
 			request.setAttribute("pcount", pcount);

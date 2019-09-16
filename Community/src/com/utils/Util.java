@@ -8,8 +8,29 @@ public class Util extends SqlMapConfig {
 
 	private String arrowNbsp; //depth의 크기만큼 공백
 	private String emailNick; //이메일을 닉네임으로
+	private String kindchange;
 	
-	
+	public String getKindchange() {
+		return kindchange;
+	}
+
+	public void setKindchange(String kindseq) {
+		String kind = "";
+		
+		SqlSession sqlSession = null;
+		
+		try {
+			sqlSession = getSqlSessionFactory().openSession(true);
+			kind = sqlSession.selectOne("com.board.setKindchange",kindseq);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			sqlSession.close();
+		}
+		
+		this.kindchange = kind;
+	}
+
 	public String getEmailNick() {
 		return emailNick;
 	}

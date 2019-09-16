@@ -45,6 +45,11 @@
 		SELECT NICK FROM D_USER WHERE EMAIL=#{email}
 	</select>
 	
+<!-- 	갤러리 이름 호출 -->
+	<select id="setKindchange" parameterType="String" resultType="String">
+		SELECT KIND FROM D_LIST WHERE kindseq=#{kindseq}
+	</select>
+	
 <!-- 	닉네임을 이메일로 변경 -->
 	<select id="nickEmail" parameterType="String" resultType="String">
 		SELECT EMAIL FROM D_USER WHERE NICK=#{nick}
