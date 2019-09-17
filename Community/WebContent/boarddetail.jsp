@@ -41,51 +41,33 @@
 // 			$("#recomment").remove();
 // 			$(this).attr('class','recommentForm');
 // 		});
-		
-		$(".recommentForm").click(function(event){
-			var className=$(this).attr("class");
-			if(className=="cancelBtn"){
-				$("#recomment").remove();
-	 			$(this).attr('class','recommentForm');
-			}else{
-				$("#recomment").remove();
-				reseq = $(this).val();
-				var aCount = $(this).parent().parent().next();
-				aCount.after("<tr id='recomment'>"+
-						"<td></td>"+
-						"<td><textarea rows='2' cols='55' id='content2' ></textarea>"+
-						"<input type='button' id='recommentBtn' value='등록' />"+
-						"</td></tr>");
-				$(this).attr('class','cancelBtn');
-				
-			}
-			
+		$("body").on("click",".recommentForm",function(){
+			$("#recomment").remove();
+			$(".cancelBtn").attr('class','recommentForm');
+			reseq = $(this).val();
+			var aCount = $(this).parent().parent().next();
+			aCount.after("<tr id='recomment'>"+
+					"<td></td>"+
+					"<td><textarea rows='2' cols='55' id='content2' ></textarea>"+
+					"<input type='button' id='recommentBtn' value='등록' />"+
+					"</td></tr>");
+			$(this).attr('class','cancelBtn');
 		});
 		
-		
-// 		$(".cancelBtn").click(function(){
-// 			alert("ddd");
-// 			$("#recomment").remove();
-// 			$(this).attr('class','recommentForm');
-// 		});
-// 		$("td").off().on("click",".cancelBtn",function(){
-// 			$("#recomment").remove();
-// 			$(this).attr('class','recommentForm');
-// 		});
+		$("body").on("click",".cancelBtn",function(){
+			$("#recomment").remove();
+ 			$(this).attr('class','recommentForm');
+		});
 		
 		$("body").on("click","#recommentBtn",function(){
-			var content = $("#content2").val();
-			location.href="BoardController.do?command=recomment&seq=${dto.seq}&reseq="+reseq+"&content="+content;
+			var content = $("#content2");
+			if(content.val().length == 0){
+				alert("내용을 입력하시오");
+				content.focus();
+				return false;
+			}
+			location.href="BoardController.do?command=recomment&seq=${dto.seq}&reseq="+reseq+"&content="+content.val();
 		});
-		
-// 		$("#recommentBtn").click(function(){
-// 			var content = $("#content2").val();
-// 			location.href="BoardController.do?command=recomment&seq=${dto.seq}&reseq="+reseq+"&content="+content;
-// 		});
-		
-// 		$("#delcomment").click(function(){
-// 			location.href="BoardController.do?command=recomment&seq=${seq}";
-// 		});
 		
 		$("#like").click(function(){
 			var aCount = $(this);
@@ -197,6 +179,7 @@
 					<tr>
 						<td colspan="3">${cdto.content}</td>
 					</tr>
+					
 					</c:forEach>
 				</c:if>
 				<c:if test="${ldto != null}">

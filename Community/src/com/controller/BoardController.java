@@ -213,8 +213,7 @@ public class BoardController extends HttpServlet {
 			boolean isS = cdao.addcomment(new CommentDto(0,seq,content,email));
 			
 			if(isS) {
-				request.setAttribute("seq", seq);
-				dispatch("BoardController.do?command=boarddetail", request, response);
+				response.sendRedirect("BoardController.do?command=boarddetail&seq="+seq);
 			}else {
 				request.setAttribute("msg", "댓글달기 실패");
 				dispatch("error.jsp",request,response);
@@ -228,8 +227,7 @@ public class BoardController extends HttpServlet {
 			boolean isS = cdao.recomment(new CommentDto(reseq,seq,content,email));
 			
 			if(isS) {
-				request.setAttribute("seq", seq);
-				dispatch("BoardController.do?command=boarddetail", request, response);
+				response.sendRedirect("BoardController.do?command=boarddetail&seq="+seq);
 			}else {
 				request.setAttribute("msg", "대댓글달기 실패");
 				dispatch("error.jsp",request,response);
@@ -242,8 +240,7 @@ public class BoardController extends HttpServlet {
 			boolean isS = cdao.delcomment(reseq);
 			
 			if(isS) {
-				request.setAttribute("seq", seq);
-				dispatch("BoardController.do?command=boarddetail", request, response);
+				response.sendRedirect("BoardController.do?command=boarddetail&seq="+seq);
 			}else {
 				request.setAttribute("msg", "댓글삭제 실패");
 				dispatch("error.jsp",request,response);
