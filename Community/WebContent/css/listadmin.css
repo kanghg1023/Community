@@ -1,13 +1,11 @@
-charset "UTF-8";
+@charset "UTF-8";
 
 #container {
-	width: 100%;
-	align-content: center;
+	text-align: center;
 }
 
 .table {
 	border-collapse: collapse;
-    text-align: left;
     line-height: 1.5;
     border-top: 1px solid #ccc;
     border-left: 3px solid #369;
@@ -37,7 +35,7 @@ charset "UTF-8";
 }
 
 #kind {
-	width: 200px;
+	width: 300px;
     padding: 10px;
     vertical-align: top;
     border-right: 1px solid #ccc;
@@ -46,12 +44,16 @@ charset "UTF-8";
 }
 
 #kc {
-	width: 500px;
+	width: 600px;
     padding: 10px;
     vertical-align: top;
     border-right: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
     text-align: center;
+}
+
+#btn {
+	text-align: center;
 }
 
 a {

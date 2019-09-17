@@ -37,7 +37,7 @@
 				</tr>
 			</c:forEach>
 			<tr>
-				<td colspan="3" align="right">
+				<td colspan="3" align="right" id="btn">
 					<input type="submit" value="게시판 개설" class="button" />
 				</td>
 			</tr>

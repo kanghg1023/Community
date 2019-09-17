@@ -126,13 +126,11 @@
 					</c:otherwise>
 				</c:choose>
 				<tr>
-					<td colspan="6">
-						<c:if test="${ldto != null}">
-						<input type="button" value="글추가"
-							onclick="location.href='BoardController.do?command=insertForm'"
-							id="btn1" />
-						</c:if> 
-						<input type="submit" value="글삭제" id="btn2" />
+					<td colspan="6"><c:if test="${ldto != null}">
+							<input type="button" value="글추가"
+								onclick="location.href='BoardController.do?command=insertForm'"
+								id="btn1" />
+						</c:if> <input type="submit" value="글삭제" id="btn2" />
 					</td>
 				</tr>
 			</table>
