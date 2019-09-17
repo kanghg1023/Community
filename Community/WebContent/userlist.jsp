@@ -36,8 +36,8 @@
 			<c:forEach items="${list}" var="dto">
 				<tr>
 					<td>${dto.email}</td>
-					<td><a
-						href="LoginController.do?command=useroutfrom&email=${dto.email}" title="강제탈퇴">${dto.nick}</a>
+					<td>
+						<a href="LoginController.do?command=useroutfrom&email=${dto.email}" title="강제탈퇴">${dto.nick}</a>
 					</td>
 					<c:choose>
 						<c:when test="${dto.role eq 'ADMIN'}">

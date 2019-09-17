@@ -17,22 +17,16 @@
 	}
 
 	$(function() {
-		$("#pmoveBtn")
-				.click(
-						function() {
-							var pNum = $("#pmove").val();
-							location.href = "BoardController.do?command=boardlist&searchType=${searchType}&search=${search}&pNum="
-									+ pNum;
-						});
+		$("#pmoveBtn").click(function() {
+			var pNum = $("#pmove").val();
+			location.href = "BoardController.do?command=boardlist&searchType=${searchType}&search=${search}&pNum="+pNum;
+		});
 
-		$("#searchBtn")
-				.click(
-						function() {
-							var searchType = $("#searchType").val();
-							var search = $("#search").val();
-							location.href = "BoardController.do?command=boardlist&pNum=1&searchType="
-									+ searchType + "&search=" + search;
-						});
+		$("#searchBtn").click(function() {
+			var searchType = $("#searchType").val();
+			var search = $("#search").val();
+			location.href = "BoardController.do?command=boardlist&pNum=1&searchType="+searchType+"&search="+search;
+		});
 
 		$("form").submit(function() {
 			var bool = true;
@@ -65,11 +59,13 @@
 				<col width="100px" />
 				<col width="30px" />
 				<tr>
-					<td colspan="6"><select id="searchType">
+					<td colspan="6">
+						<select id="searchType">
 							<option value="title">제목</option>
 							<option value="nick">닉네임</option>
-					</select> <input type="text" id="search" /> <input type="button"
-						id="searchBtn" value="검색" /></td>
+						</select> 
+						<input type="text" id="search" /> <input type="button" id="searchBtn" value="검색" />
+					</td>
 				<tr>
 				<tr>
 					<th><input type="checkbox" name="all" onclick="allSel(this)" /></th>
@@ -97,32 +93,32 @@
 										<td id="title1">----삭제된 게시글입니다.----</td>
 									</c:when>
 									<c:otherwise>
-										<td align="left" id="title2"><jsp:setProperty
-												property="arrowNbsp" name="util" value="${dto.depth}" /> <jsp:getProperty
-												property="arrowNbsp" name="util" /> <a
-											href="BoardController.do?command=boarddetail&seq=${dto.seq}">${dto.title}</a>
+										<td align="left" id="title2">
+											<jsp:setProperty property="arrowNbsp" name="util" value="${dto.depth}" />
+											<jsp:getProperty property="arrowNbsp" name="util" />
+											<a href="BoardController.do?command=boarddetail&seq=${dto.seq}">${dto.title}</a>
 										</td>
 									</c:otherwise>
 								</c:choose>
-								<td id="nick"><jsp:setProperty property="emailNick"
-										name="util" value="${dto.email}" /> <jsp:getProperty
-										property="emailNick" name="util" /></td>
-								<td id="regdate"><fmt:formatDate value="${dto.regdate}"
-										pattern="yyyy-MM-dd" /></td>
+								<td id="nick">
+									<jsp:setProperty property="emailNick" name="util" value="${dto.email}" />
+									<jsp:getProperty property="emailNick" name="util" />
+								</td>
+								<td id="regdate">
+									<fmt:formatDate value="${dto.regdate}" pattern="yyyy-MM-dd" />
+								</td>
 								<td id="cnt">${dto.readcount}</td>
-
 							</tr>
 						</c:forEach>
-
 						<tr>
-							<td colspan="6" align="center"><a
-								href="BoardController.do?command=boardlist&searchType=${searchType}&search=${search}&pNum=${map.prePageNum}">◀</a>
+							<td colspan="6" align="center">
+								<a href="BoardController.do?command=boardlist&searchType=${searchType}&search=${search}&pNum=${map.prePageNum}">◀</a>
 								<input type="text" id="pmove" value="${pNum}" />
-								&nbsp;/&nbsp;${map.endPage} <a
-								href="BoardController.do?command=boardlist&searchType=${searchType}&search=${search}&pNum=${map.nextPageNum}">▶</a>
-								<input type="button" id="pmoveBtn" value="이동" /></td>
+								&nbsp;/&nbsp;${map.endPage}
+								<a href="BoardController.do?command=boardlist&searchType=${searchType}&search=${search}&pNum=${map.nextPageNum}">▶</a>
+								<input type="button" id="pmoveBtn" value="이동" />
+							</td>
 						</tr>
-
 					</c:otherwise>
 				</c:choose>
 				<c:if test="${ldto != null}">

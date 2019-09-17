@@ -277,4 +277,22 @@ private String nameSpace = "com.board.";
 		
 		return list;
 	}
+	
+	public List<BoardDto> bestList(){
+		List<BoardDto> list = new ArrayList<>();
+		
+		SqlSession sqlSession = null;
+		
+		try {
+			sqlSession = getSqlSessionFactory().openSession(true);
+			list = sqlSession.selectList(nameSpace+"bestlist");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			sqlSession.close();
+		}
+		
+		return list;
+	}
+	
 }

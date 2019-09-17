@@ -103,4 +103,15 @@
 		SELECT CEIL(COUNT(*)/5) FROM D_BOARD WHERE KINDSEQ=#{kindseq} AND EMAIL=#{email}
 	</select>
 	
+	<select id="bestlist" resultType="BoardDto">
+		<![CDATA[
+		SELECT L.SEQ, B.TITLE, B.EMAIL 
+		FROM D_BOARD B,
+			(SELECT ROW_NUMBER() OVER (ORDER BY COUNT(SEQ) DESC) AS RN, SEQ
+				FROM D_LIKE GROUP BY SEQ ORDER BY RN) L
+		WHERE B.SEQ = L.SEQ
+		AND L.RN <= 5 ORDER BY L.RN
+		]]>
+	</select>
+	
 </mapper>

@@ -12,8 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.daos.BoardDao;
 import com.daos.ListDao;
 import com.daos.UserDao;
+import com.dtos.BoardDto;
 import com.dtos.ListDto;
 import com.dtos.UserDto;
 
@@ -39,7 +41,11 @@ public class LoginController extends HttpServlet {
 		if(command.equals("index")){
 			ListDao listdao = new ListDao();
 			List<ListDto> blist = listdao.listlist();
+			BoardDao boarddao = new BoardDao();
+			List<BoardDto> bestlist = boarddao.bestList();
+			
 			request.setAttribute("blist", blist);
+			request.setAttribute("bestlist", bestlist);
 			dispatch("main.jsp", request, response);
 		}else if(command.equals("regist")){
 			response.sendRedirect("regist.jsp");

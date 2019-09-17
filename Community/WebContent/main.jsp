@@ -17,6 +17,7 @@
 </script>
 </head>
 <body>
+<jsp:useBean id="util" class="com.utils.Util" />
 <c:choose>
 	<c:when test="${ldto == null}">
 		<h1>로그인</h1>
@@ -88,5 +89,19 @@
 	</c:if>
 </c:forEach>
 </ul>
+<h3>베스트 게시글</h3>
+<table border="1">
+	<c:forEach items="${bestlist}" var="dto">
+		<tr>
+			<td>
+				<a href="BoardController.do?command=boarddetail&seq=${dto.seq}">${dto.title}</a>
+			</td>
+			<th>
+				<jsp:setProperty property="emailNick" name="util" value="${dto.email}" />
+				<jsp:getProperty property="emailNick" name="util" />
+			</th>
+		</tr>
+	</c:forEach>
+</table>
 </body>
 </html>

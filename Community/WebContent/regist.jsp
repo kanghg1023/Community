@@ -56,8 +56,9 @@
 					<td><input type="tel" name="phone" id="phone" /></td>
 				</tr>
 				<tr>
-					<td colspan="2" class="btn"><input type="submit" value="가입완료"
-						class="button" /></td>
+					<td colspan="2" class="btn">
+						<input type="submit" value="가입완료" class="button" />
+					</td>
 				</tr>
 			</table>
 		</form>
