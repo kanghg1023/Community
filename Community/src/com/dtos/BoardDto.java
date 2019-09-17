@@ -16,6 +16,8 @@ public class BoardDto {
 	private int step;
 	private int depth;
 	
+	private int rk; //추천수 
+	
 	public BoardDto() {
 		super();
 	}
@@ -146,6 +148,14 @@ public class BoardDto {
 
 	public void setDepth(int depth) {
 		this.depth = depth;
+	}
+
+	public int getRk() {
+		return rk;
+	}
+
+	public void setRk(int rk) {
+		this.rk = rk;
 	}
 
 	@Override

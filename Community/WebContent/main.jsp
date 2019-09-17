@@ -91,15 +91,21 @@
 </ul>
 <h3>베스트 게시글</h3>
 <table border="1">
+	<tr>
+		<td>제목</td>
+		<td>작성자</td>
+		<td>추천수</td>
+	</tr>
 	<c:forEach items="${bestlist}" var="dto">
 		<tr>
 			<td>
 				<a href="BoardController.do?command=boarddetail&seq=${dto.seq}">${dto.title}</a>
 			</td>
-			<th>
+			<td>
 				<jsp:setProperty property="emailNick" name="util" value="${dto.email}" />
 				<jsp:getProperty property="emailNick" name="util" />
-			</th>
+			</td>
+			<td>${dto.rk}</td>
 		</tr>
 	</c:forEach>
 </table>
