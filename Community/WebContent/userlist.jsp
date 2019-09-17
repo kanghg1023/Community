@@ -10,9 +10,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <title></title>
 <link rel="stylesheet" href="css/userlist.css">
-<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript">
+	
+	$(function(){
+		$(".authchange").click(function(){
+			var email = $(this).val();
+			var role = $(this).prev("select").val();
+			location.href="LoginController.do?command=authchange&email="+email+"&role="+role;
+		});
+	});
+</script>
 </head>
 <body>
 	<div id="container">
@@ -34,27 +44,18 @@
 							<td>관리자</td>
 						</c:when>
 						<c:otherwise>
-							<td><select name="role">
-									<option value="MANAGER"
-										${dto.role eq "MANAGER" ? "selected" : ""}>정회원</option>
-									<option value="MANAGER" ${dto.role eq "USER" ? "selected" : ""}>일반회원</option>
-							</select>
-								<button onclick="authchange(${dto.email},this)">변경</button></td>
+							<td>
+								<select name="role">
+									<option value="MANAGER" ${dto.role eq "MANAGER" ? "selected" : ""}>정회원</option>
+									<option value="USER" ${dto.role eq "USER" ? "selected" : ""}>일반회원</option>
+								</select>
+								<button class="authchange" value="${dto.email}">변경</button>
+							</td>
 						</c:otherwise>
 					</c:choose>
 				</tr>
 			</c:forEach>
 		</table>
-	<script type="text/javascript">
-	function authchange(email,btn){
-// 		var role = $("#"+email);
-// 		alert(role);
-// 		alert($(btn).prev("select").prop("tagName"));
-		var role = $(btn).prev("select").val();
-// 		alert(role);
-		location.href="LoginController.do?command=authchange&email="+email+"&role="+role;
-	}
-	</script>
 	</div>
 </body>
 </html>
