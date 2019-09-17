@@ -125,14 +125,14 @@
 
 					</c:otherwise>
 				</c:choose>
+				<c:if test="${ldto != null}">
 				<tr>
-					<td colspan="6"><c:if test="${ldto != null}">
-							<input type="button" value="글추가"
-								onclick="location.href='BoardController.do?command=insertForm'"
-								id="btn1" />
-						</c:if> <input type="submit" value="글삭제" id="btn2" />
+					<td colspan="6">
+						<input type="button" value="글추가" onclick="location.href='BoardController.do?command=insertForm'" id="btn1" />
+						<input type="submit" value="글삭제" id="btn2" />
 					</td>
 				</tr>
+				</c:if> 
 			</table>
 		</div>
 	</form>
