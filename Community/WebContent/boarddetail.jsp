@@ -9,18 +9,7 @@
 <meta charset="UTF-8">
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <title></title>
-<style type="text/css">
-	#commentForm {display: none;}
-	.recomment {display: none;}
-	#container {
-		height: 400px;
-		width: 600px;
-		border: 1px solid red;
-		overflow: auto;
-	}
-	img{width: 12px; height: 12px;}
-	
-</style>
+<link rel="stylesheet" href="css/boarddetail.css">
 <script type="text/javascript">
 	function delcomment(reseq){
 		location.href="BoardController.do?command=delcomment&reseq="+reseq+"&seq=${dto.seq}";
@@ -107,7 +96,7 @@
 <jsp:useBean id="util" class="com.utils.Util" />
 <div id="container">
 <h1>게시글 상세보기</h1>
-<table border="1">
+<table border="1" class="table">
 	<tr>
 		<th>번호</th>
 		<td>${dto.seq}</td>
@@ -124,7 +113,7 @@
 		<td>${dto.title}</td>
 	</tr>
 	<tr>
-		<th>내용</th>
+		<th class="content">내용</th>
 		<td><textarea rows="10" cols="60" readonly="readonly">${dto.content}</textarea></td>
 	</tr>
 	<tr>
@@ -138,6 +127,7 @@
 				<button onclick="location.href='BoardController.do?command=muldel&chk=${dto.seq}'">삭제</button>
 			</c:if>
 			<button onclick="location.href='BoardController.do?command=boardlist'">목록</button>
+			<div id="joa">
 			<c:choose>
 				<c:when test="${ldto != null}">
 					<a href="" id="like"><img alt="좋아요" src="img/heart${like ? '2' : '1'}.png">${likecount}</a>
@@ -146,6 +136,7 @@
 					<img alt="좋아요" src="img/heart1.png">${likecount}
 				</c:otherwise>
 			</c:choose>
+			</div>
 			
 		</td>
 	</tr>
@@ -155,7 +146,7 @@
 		<input type="hidden" name="command" value="addcomment" />
 		<input type="hidden" name="seq" value="${dto.seq}" />
 		<c:if test="${ldto != null || clist != null}">
-			<table border="1">
+			<table border="1" class="table">
 				<c:if test="${clist != null}">
 					<c:forEach items="${clist}" var="cdto">
 					<tr>

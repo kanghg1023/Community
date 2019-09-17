@@ -1,0 +1,84 @@
+@charset "UTF-8";
+
+/* 댓글 안보이게 */
+#commentForm {
+	display: none;
+}
+
+.recomment {
+	display: none;
+}
+	
+#container {
+	overflow: auto;
+	width: 100%;
+ 	text-align: center;
+/* 	text-align: center; */
+}
+
+
+.table
+{
+	 border-collapse: collapse;
+    text-align: left;
+    line-height: 1.5;
+    border-top: 1px solid #ccc;
+    border-left: 3px solid #369;
+  	margin : 20px 10px;
+	display: inline-block;
+}
+
+.table th {
+    width: 147px;
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+    color: #153d73;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+}
+
+.table td {
+    width: 349px;
+    padding: 10px;
+    vertical-align: top;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    text-align: left;
+}
+
+.content {
+	line-height: 150px;
+}
+
+button {
+	width:80px;
+    background-color: #000040;
+    border: none;
+    color:#fff;
+    padding: 2px 0;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 1px;
+    cursor: pointer;
+    border-radius:10px;
+}
+
+img{width: 24px; height: 24px;}
+
+#joa {
+	width:50px;
+	line-height: 0px;
+	text-align: right;
+	float: right;
+}
+
+a {
+	text-decoration: none;
+}
+a:hover {
+	color: red;
+}
