@@ -51,6 +51,9 @@ public class BoardController extends HttpServlet {
 			String pNum = request.getParameter("pNum");
 			if(pNum == null) {
 				pNum = (String)request.getSession().getAttribute("pNum");
+				if(pNum == null) {
+					pNum = String.valueOf(1);
+				}
 			}else {
 				request.getSession().setAttribute("pNum", pNum);
 			}
@@ -111,6 +114,10 @@ public class BoardController extends HttpServlet {
 			}
 		}else if(command.equals("boarddetail")) { //게시글 상세보기
 			String kindseq = (String)session.getAttribute("kindseq");
+			if(kindseq==null) {
+				kindseq = request.getParameter("kindseq");
+				request.getSession().setAttribute("kindseq", kindseq);
+			}
 			String seq=request.getParameter("seq");
 			
 			String rSeq = (String)session.getAttribute("readcount");

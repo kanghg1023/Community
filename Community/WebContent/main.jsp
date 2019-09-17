@@ -99,7 +99,7 @@
 	<c:forEach items="${bestlist}" var="dto">
 		<tr>
 			<td>
-				<a href="BoardController.do?command=boarddetail&seq=${dto.seq}">${dto.title}</a>
+				<a href="BoardController.do?command=boarddetail&seq=${dto.seq}&kindseq=${dto.kindseq}">${dto.title}</a>
 			</td>
 			<td>
 				<jsp:setProperty property="emailNick" name="util" value="${dto.email}" />
