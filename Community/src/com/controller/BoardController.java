@@ -113,9 +113,11 @@ public class BoardController extends HttpServlet {
 				dispatch("error.jsp",request,response);
 			}
 		}else if(command.equals("boarddetail")) { //게시글 상세보기
-			String kindseq = (String)session.getAttribute("kindseq");
+			String kindseq = request.getParameter("kindseq");
 			if(kindseq==null) {
-				kindseq = request.getParameter("kindseq");
+				kindseq = (String)session.getAttribute("kindseq");
+				
+			}else {
 				request.getSession().setAttribute("kindseq", kindseq);
 			}
 			String seq=request.getParameter("seq");
