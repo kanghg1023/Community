@@ -41,6 +41,7 @@ public class LoginController extends HttpServlet {
 		if(command.equals("index")){
 			session.removeAttribute("readcount");//조회수세션삭제
 			session.removeAttribute("pNum");//페이지세션삭제
+			
 			ListDao listdao = new ListDao();
 			List<ListDto> blist = listdao.listlist();
 			BoardDao boarddao = new BoardDao();
