@@ -96,7 +96,7 @@
 <jsp:useBean id="util" class="com.utils.Util" />
 <div id="container">
 <h1>게시글 상세보기</h1>
-<table border="1" class="table">
+<table border="1" class="bodyTable">
 	<tr>
 		<th>번호</th>
 		<td>${dto.seq}</td>
@@ -146,18 +146,18 @@
 		<input type="hidden" name="command" value="addcomment" />
 		<input type="hidden" name="seq" value="${dto.seq}" />
 		<c:if test="${ldto != null || clist != null}">
-			<table border="1" class="table">
+			<table border="1" class="commentTable">
 				<c:if test="${clist != null}">
 					<c:forEach items="${clist}" var="cdto">
 					<tr>
 						<c:if test="${cdto.depth > 0}">
-							<td rowspan="2"><img src="img/arrow.jpg" alt="답글" /></td>
+							<td rowspan="2" class="arrowSel"><img src="img/arrow.jpg" alt="답글" /></td>
 						</c:if>
 						<th>
 							<jsp:setProperty property="emailNick" name="util" value="${cdto.email}" />
 							<jsp:getProperty property="emailNick" name="util" />
 						</th>
-						<td>
+						<td colspan="2">
 							<fmt:formatDate value="${cdto.regdate}" pattern="yyyy-MM-dd"/>
 							<c:if test="${ldto != null}">
 								<button type="button" class="recommentForm" value="${cdto.reseq}">답글</button>

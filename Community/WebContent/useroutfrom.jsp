@@ -7,8 +7,21 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <title></title>
 <link rel="stylesheet" href="css/useroutfrom.css">
+<script type="text/javascript">
+	$(function() {
+		$("form").submit(function(){
+			var isDel = confirm("정말 탈퇴 시키시겠습니까?");
+			if(isDel) {
+				location.href = "LoginController.do?command=userout&withdraw&withdraw=${dto.email}";
+			}else{
+				return false;
+			}
+		});
+	});
+</script>
 </head>
 <body>
 <div id="container">
@@ -51,5 +64,6 @@
 	</table>
 </form>
 </div>
+
 </body>
 </html>

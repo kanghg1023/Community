@@ -17,7 +17,7 @@
 }
 
 
-.table
+.bodyTable
 {
 	 border-collapse: collapse;
     text-align: left;
@@ -28,7 +28,7 @@
 	display: inline-block;
 }
 
-.table th {
+.bodyTable th {
     width: 147px;
     padding: 10px;
     font-weight: bold;
@@ -39,7 +39,7 @@
     text-align: center;
 }
 
-.table td {
+.bodyTable td {
     width: 349px;
     padding: 10px;
     vertical-align: top;
@@ -81,4 +81,49 @@ a {
 }
 a:hover {
 	color: red;
+}
+
+.bodyTable
+{
+	 border-collapse: collapse;
+    text-align: left;
+    line-height: 1.5;
+    border-top: 1px solid #ccc;
+    border-left: 3px solid #369;
+  	margin : 20px 10px;
+	display: inline-block;
+}
+
+.commentTable
+{
+	 border-collapse: collapse;
+    text-align: left;
+    line-height: 1.5;
+    border-top: 1px solid #ccc;
+    border-left: 3px solid #369;
+  	margin : 20px 10px;
+	display: inline-block;
+}
+
+.commentTable th {
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+    color: #153d73;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+}
+
+.commentTable td {
+    width: 252px;
+    padding: 10px;
+    vertical-align: top;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    text-align: left;
+}
+
+.arrowSel {
+	width: 20px;
 }
