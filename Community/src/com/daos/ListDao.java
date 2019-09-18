@@ -65,6 +65,23 @@ public class ListDao extends SqlMapConfig{
 		return list;
 	}
 	
+	public List<ListDto> setUplist(String listpNum) {
+		List<ListDto> list = new ArrayList<>();
+		
+		SqlSession sqlSession = null;
+		
+		try {
+			sqlSession = getSqlSessionFactory().openSession(true);
+			list = sqlSession.selectList(nameSpace+"setUplist",listpNum);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			sqlSession.close();
+		}
+
+		return list;
+	}
+	
 	public boolean openlist(String[] kindseqs) {
 		int count = 0;
 		Map<String, String[]> map = new HashMap<>();
@@ -82,6 +99,23 @@ public class ListDao extends SqlMapConfig{
 		}
 
 		return count>0 ? true : false;
+	}
+	
+	public int listPageMax() {
+		int count = 0;
+		
+		SqlSession sqlSession = null;
+		
+		try {
+			sqlSession = getSqlSessionFactory().openSession(true);
+			count = sqlSession.selectOne(nameSpace+"listPageMax");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			sqlSession.close();
+		}
+		
+		return count;
 	}
 	
 }

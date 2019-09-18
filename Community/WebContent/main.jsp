@@ -58,7 +58,7 @@
 				<ul>
 					<li><a href="LoginController.do?command=alluserstatus">전체회원정보</a></li>
 					<li><a href="LoginController.do?command=alluserlist">사용중인회원목록</a></li>
-					<li><a href="ListController.do?command=listadmin">게시판 관리</a>
+					<li><a href="ListController.do?command=listadmin&listpNum=1">게시판 관리</a>
 				</ul>
 			</c:when>
 			<c:otherwise>

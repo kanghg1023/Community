@@ -8,7 +8,7 @@
 		READCOUNT, ENABLED, REFER, DEPTH
 	</sql>
 	
-<!-- 	글목록보기 -->
+<!-- 	글목록보기 + 검색 -->
 	<select id="boardlist" parameterType="Map" resultType="BoardDto">
 		<include refid="a"></include>
 		FROM (

@@ -3,6 +3,7 @@ package com.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.daos.ListDao;
 import com.dtos.ListDto;
+import com.utils.Paging;
 
 @WebServlet("/ListController.do")
 public class ListController extends HttpServlet {
@@ -55,8 +57,17 @@ public class ListController extends HttpServlet {
 				dispatch("error.jsp", request, response);
 			}
 		}else if(command.equals("listadmin")){
+			String listpNum = request.getParameter("listpNum");
 			ListDao listdao = new ListDao();
 			List<ListDto> blist = listdao.sublist();
+			List<ListDto> alist = listdao.setUplist(listpNum);
+			
+			int pcount = listdao.listPageMax();
+			Map<String,Integer> map = Paging.pagingValue(pcount, listpNum, 5);
+			
+			request.setAttribute("listpNum", listpNum);
+			request.setAttribute("map", map);
+			request.setAttribute("alist", alist);
 			request.setAttribute("blist", blist);
 			dispatch("listadmin.jsp", request, response);
 		}else if(command.equals("openlist")){

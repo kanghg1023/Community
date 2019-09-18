@@ -51,6 +51,35 @@
 </table>
 </form>
 <a href="ListController.do?command=addlistfrom" title="바로 추가">[게시판 추가하기]</a>
+<table border="1" class="table">
+	<tr>
+		<th>게시판명</th>
+		<th>게시판 소개</th>
+		<th>상태</th>
+	</tr>
+	<c:forEach items="${alist}" var="list">
+		<tr>
+			<td>${list.kind}</td>
+			<td>${list.kindcontent}</td>
+			<td>
+				<select name="role">
+					<option value="Y" ${list.enabled eq "Y" ? "selected" : ""}>개설</option>
+					<option value="S" ${list.enabled eq "S" ? "selected" : ""}>폐쇄</option>
+				</select>
+				<button class="listchange" value="${dto.email}">변경</button>
+			</td>
+		</tr>
+	</c:forEach>
+	<tr>
+		<td colspan="3" align="center">
+			<a href="ListController.do?command=listadmin&listpNum=${map.prePageNum}">◀</a>
+			<input type="text" id="pmove" value="${listpNum}" />
+			&nbsp;/&nbsp;${map.endPage}
+			<a href="ListController.do?command=listadmin&listpNum=${map.nextPageNum}">▶</a>
+			<input type="button" id="pmoveBtn" value="이동" />
+		</td>
+	</tr>
+</table>
 </div>
 </body>
 </html>

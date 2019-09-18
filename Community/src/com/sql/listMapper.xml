@@ -16,10 +16,22 @@
 		WHERE ENABLED = 'N'
 	</select>
 	
+	<select id="setUplist" resultType="ListDto">
+		SELECT RN, KINDSEQ, ENABLED, KIND, KINDCONTENT 
+		FROM (SELECT ROW_NUMBER() OVER (ORDER BY KINDSEQ) AS RN,
+				KINDSEQ, ENABLED, KIND, KINDCONTENT FROM D_LIST
+				WHERE ENABLED != 'N')
+		WHERE CEIL(RN/5)=#{listpNum}
+	</select>
+	
 	<update id="openlist" parameterType="Map">
 		UPDATE D_LIST SET ENABLED='Y' WHERE KINDSEQ IN
 		<foreach collection="kindseqs" item="kindseq" open="(" close=")" separator=",">
 			#{kindseq}
 		</foreach>
 	</update>
+	
+	<select id="listPageMax" resultType="int">
+		SELECT CEIL(COUNT(*)/5) FROM D_LIST
+	</select>
 </mapper>
