@@ -21,7 +21,7 @@
 			var pNum = $("#pmove").val();
 			var endPage = ${map.endPage};
 			if(pNum > endPage){
-				pNum = ${map.endPage};
+				pNum = endPage;
 			}
 			location.href = "BoardController.do?command=boardlist&searchType=${searchType}&search=${search}&pNum="+pNum;
 		});
