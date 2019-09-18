@@ -37,7 +37,7 @@
 			var aCount = $(this).parent().parent().next();
 			aCount.after("<tr id='recomment'>"+
 					"<td></td>"+
-					"<td><textarea rows='2' cols='55' id='content2' ></textarea>"+
+					"<td colspan='2'><textarea rows='2' cols='55' id='content2' ></textarea>"+
 					"<input type='button' id='recommentBtn' value='등록' />"+
 					"</td></tr>");
 			$(this).attr('class','cancelBtn');
@@ -147,6 +147,14 @@
 		<input type="hidden" name="seq" value="${dto.seq}" />
 		<c:if test="${ldto != null || clist != null}">
 			<table border="1" class="commentTable">
+				<c:if test="${ldto != null}">
+					<tr>
+						<td colspan="3">
+							<textarea rows="2" cols="75" name="content" ></textarea>
+							<input type="submit" value="등록" id="btn"/>
+						</td>
+					</tr>
+				</c:if>
 				<c:if test="${clist != null}">
 					<c:forEach items="${clist}" var="cdto">
 					<tr>
@@ -171,14 +179,6 @@
 						<td colspan="3" class="conSel">${cdto.content}</td>
 					</tr>
 					</c:forEach>
-				</c:if>
-				<c:if test="${ldto != null}">
-					<tr>
-						<td colspan="3">
-							<textarea rows="2" cols="75" name="content" ></textarea>
-							<input type="submit" value="등록" />
-						</td>
-					</tr>
 				</c:if>
 			</table>
 		</c:if>

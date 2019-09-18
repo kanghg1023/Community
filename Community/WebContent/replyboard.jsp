@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 <title></title>
+<link rel="stylesheet" href="css/replyboard.css">
 <script type="text/javascript">
 	function cancel(){
 		location.href="BoardController.do?command=boarddetail&seq=${seq}";
@@ -31,26 +32,28 @@
 </script>
 </head>
 <body>
+<div id="container">
 <h1>답글달기</h1>
 <form action="BoardController.do" method="post">
 <input type="hidden" name="command" value="replyboard" />
 <input type="hidden" name="seq" value="${seq}" />
-<table border="1">
+<table border="1" class="table">
 	<tr>
 		<th>제목</th>
-		<td><input type="text" name="title" /></td>
+		<td id="title"><input type="text" name="title" /></td>
 	</tr>
 	<tr>
-		<th>내용</th>
+		<th id="content">내용</th>
 		<td><textarea rows="10" cols="60" name="content" ></textarea></td>
 	</tr>
 	<tr>
 		<td colspan="2">
-			<input type="submit" value="완료" />
-			<input type="button" value="취소" onclick="cancel()" />
+			<input type="submit" value="완료" class="button"/>
+			<input type="button" value="취소" onclick="cancel()" class="button"/>
 		</td>
 	</tr>
 </table>
 </form>
+</div>
 </body>
 </html>
