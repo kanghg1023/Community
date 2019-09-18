@@ -153,12 +153,12 @@
 						<c:if test="${cdto.depth > 0}">
 							<td rowspan="2" class="arrowSel"><img src="img/arrow.jpg" alt="답글" /></td>
 						</c:if>
-						<th>
+						<th class="nickSel">
 							<jsp:setProperty property="emailNick" name="util" value="${cdto.email}" />
 							<jsp:getProperty property="emailNick" name="util" />
 						</th>
 						<td colspan="2">
-							<fmt:formatDate value="${cdto.regdate}" pattern="yyyy-MM-dd"/>
+							<fmt:formatDate value="${cdto.regdate}" pattern="yyyy-MM-dd HH:mm"/>
 							<c:if test="${ldto != null}">
 								<button type="button" class="recommentForm" value="${cdto.reseq}">답글</button>
 							</c:if>
@@ -168,15 +168,14 @@
 						</td>
 					</tr>
 					<tr>
-						<td colspan="3">${cdto.content}</td>
+						<td colspan="3" class="conSel">${cdto.content}</td>
 					</tr>
-					
 					</c:forEach>
 				</c:if>
 				<c:if test="${ldto != null}">
 					<tr>
 						<td colspan="3">
-							<textarea rows="2" cols="60" name="content" ></textarea>
+							<textarea rows="2" cols="75" name="content" ></textarea>
 							<input type="submit" value="등록" />
 						</td>
 					</tr>
