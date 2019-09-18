@@ -19,6 +19,9 @@
 	$(function() {
 		$("#pmoveBtn").click(function() {
 			var pNum = $("#pmove").val();
+			if(pNum > ${map.endPage}){
+				pNum = ${map.endPage};
+			}
 			location.href = "BoardController.do?command=boardlist&searchType=${searchType}&search=${search}&pNum="+pNum;
 		});
 
@@ -113,7 +116,14 @@
 						<tr>
 							<td colspan="6" align="center">
 								<a href="BoardController.do?command=boardlist&searchType=${searchType}&search=${search}&pNum=${map.prePageNum}">◀</a>
-								<input type="text" id="pmove" value="${pNum}" />
+								<c:choose>
+									<c:when test="${pNum==null || pNum==''}">
+										<input type="text" id="pmove" value="1" />
+									</c:when>
+									<c:otherwise>
+										<input type="text" id="pmove" value="${pNum}" />
+									</c:otherwise>
+								</c:choose>
 								&nbsp;/&nbsp;${map.endPage}
 								<a href="BoardController.do?command=boardlist&searchType=${searchType}&search=${search}&pNum=${map.nextPageNum}">▶</a>
 								<input type="button" id="pmoveBtn" value="이동" />
