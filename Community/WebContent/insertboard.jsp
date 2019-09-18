@@ -9,6 +9,7 @@
 <title></title>
 <link rel="stylesheet" href="css/insertboard.css">
 <script type="text/javascript">
+
 	$(function(){
 		$("form").submit(function(){
 			var bool = true;
