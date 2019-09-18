@@ -10,6 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <title>메인화면</title>
+<link rel="stylesheet" href="css/main.css">
 <script type="text/javascript">
 	function regist(){
 		location.href="LoginController.do?command=regist";
@@ -18,27 +19,29 @@
 </head>
 <body>
 <jsp:useBean id="util" class="com.utils.Util" />
+<!-- 	상단로고 -->
+	<div id="logo">
+		<a href="index.jsp"> <img src="img/logo.jpg" alt="홈" /></a>
+	</div>
+<ul class="line">
+  <li><a href="#"></a></li>
+</ul>
+<!-- 	/상단로고 -->
+<div id="main_content"><!-- 메인컨텐츠 -->
+<div id="rightbar"><!-- 오른쪽바 -->
+<div id="login"><!-- 로그인폼 -->
+<div class="wrapper">
+  <div id="formContent">
 <c:choose>
 	<c:when test="${ldto == null}">
-		<h1>로그인</h1>
 		<form action="LoginController.do" method="post">
 			<input type="hidden" name="command" value="login" />
-			<table border="1">
-				<tr>
-					<th>이메일</th>
-					<td><input type="email" name="email" /></td>
-				</tr>
-				<tr>
-					<th>패스워드</th>
-					<td><input type="password" name="password" /></td>
-				</tr>
-				<tr>
-					<td colspan="2">
-						<input type="submit" value="로그인" />
-						<input type="button" value="회원가입" onclick="regist()" />
-					</td>
-				</tr>
-			</table>
+			<form>
+					<input type="email" name="email" id="email" placeholder="이메일"/>
+					<input type="password" name="password" id="password" placeholder="비밀번호"/>
+					<input type="submit" value="로그인" />
+					<input type="button" value="회원가입" onclick="regist()" />
+			</form>
 		</form>
 	</c:when>
 	<c:otherwise>
@@ -75,26 +78,17 @@
 		</c:choose>
 	</c:otherwise>
 </c:choose>
-<c:if test="${msg != null}">
-	<script type="text/javascript">
-		alert("${msg}");
-	</script>
-</c:if>
-			
-<h3>게시판목록</h3>
-<ul>
-<c:forEach items="${blist}" var="list">
-	<c:if test="${list.enabled eq 'Y'}">
-		<li><a href="BoardController.do?command=boardlist&kindseq=${list.kindseq}&pNum=1">${list.kind}</a></li>
-	</c:if>
-</c:forEach>
-</ul>
-<h3>베스트 게시글</h3>
-<table border="1">
+</div><!-- #formContent -->
+</div><!-- .wrapper -->
+</div><!-- /로그인폼 -->
+<div id="best"><!-- 베스트 -->
+<div class="wrapper">
+<h4>베스트 게시글</h4>
+<table border="1" class="sel">
 	<tr>
 		<td>제목</td>
 		<td>작성자</td>
-		<td>추천수</td>
+		<td><img alt="좋아요" src="img/heart2.png"></td>
 	</tr>
 	<c:forEach items="${bestlist}" var="dto">
 		<tr>
@@ -109,5 +103,26 @@
 		</tr>
 	</c:forEach>
 </table>
+</div><!-- .wrapper -->
+</div><!-- /베스트 -->
+</div><!-- /오른쪽바 -->
+<c:if test="${msg != null}">
+	<script type="text/javascript">
+		alert("${msg}");
+	</script>
+</c:if>
+<div id="centerbar"><!-- 중간바 -->
+<div id="list"><!-- 게시판목록 -->
+<h3>게시판목록</h3>
+<ul>
+<c:forEach items="${blist}" var="list">
+	<c:if test="${list.enabled eq 'Y'}">
+		<li><a href="BoardController.do?command=boardlist&kindseq=${list.kindseq}&pNum=1">${list.kind}</a></li>
+	</c:if>
+</c:forEach>
+</ul>
+</div><!-- /게시판목록 -->
+</div><!-- /중간바 -->
+</div><!-- /메인컨텐츠 -->
 </body>
 </html>

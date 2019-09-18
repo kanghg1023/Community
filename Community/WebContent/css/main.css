@@ -1,40 +1,107 @@
 @charset "UTF-8";
 
-/* #list */
-/* { */
-/* 	border: 1px solid red; */
-/* } */
-
-.table
-{
-	 border-collapse: collapse;
-    text-align: left;
-    line-height: 1.5;
-    border-top: 1px solid #ccc;
-    border-left: 3px solid #369;
-  	margin : 20px 10px;
-	display: inline-block;
+#logo {
+	width: 400px;
+    display: block;
+    margin: 0px auto;
+/*     height: 150px; */
 }
 
-.table th {
-    width: 147px;
-    padding: 10px;
-    font-weight: bold;
-    vertical-align: top;
-    color: #153d73;
-    border-right: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
-
-}
-.table td {
-    width: 349px;
-    padding: 10px;
-    vertical-align: top;
-    border-right: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
+.line {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #369;
 }
 
-.btn
-{
-	text-align: center;
+.line li {
+  float: left;
+}
+
+.line li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+#main_content {
+	width: 1000px;
+	margin: 20px 56px;
+	display: block;
+    margin: 0px auto;
+}
+
+#rightbar {
+	width: 290px;
+	float: right;
+	margin-left: 8px;
+}
+
+
+#login {
+	box-sizing: border-box;
+	position: static;
+	float: right;
+	margin-bottom: 4px;
+	column-width: 290px;
+}
+
+.wrapper {
+	border:solid 1px blue;
+ 	display: flex;
+  	align-items: center;
+  	flex-direction: column; 
+  	padding: 10px;
+}
+
+#formContent {
+/*   background: #fff; */
+  padding: 10px;
+  width: 90%;
+  max-width: 450px;
+  position: relative;
+  text-align: center;
+}
+
+input[type=button], input[type=submit] {
+  	width:80px;
+    background-color: #000040;
+    border: none;
+    color:#fff;
+    padding: 2px 0;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 1px;
+    cursor: pointer;
+    border-radius:10px;
+}
+
+#best {
+	box-sizing: border-box;
+	border: solid 1px red;
+	position: static;
+	float: right;
+	margin-top: 4px;
+	column-width: 290px;
+}
+
+.sel {
+	
+}
+
+#centerbar {
+	width: 694px;
+	float: right;
+	margin-right: 8px;
+}
+
+#list {
+	box-sizing: border-box;
+	border: solid 1px blue;
+	column-width: 694px;
 }

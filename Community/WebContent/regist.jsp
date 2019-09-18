@@ -20,7 +20,7 @@
 	<div id="container">
 		<!-- 상단 로고 -->
 		<div id="logo">
-			<a href="index.jsp"> <img src="img/logo.png"
+			<a href="index.jsp"> <img src="img/logo.jpg"
 				alt="홈" />
 			</a>
 		</div>
