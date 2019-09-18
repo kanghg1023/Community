@@ -19,7 +19,8 @@
 	$(function() {
 		$("#pmoveBtn").click(function() {
 			var pNum = $("#pmove").val();
-			if(pNum > ${map.endPage}){
+			var endPage = ${map.endPage};
+			if(pNum > endPage){
 				pNum = ${map.endPage};
 			}
 			location.href = "BoardController.do?command=boardlist&searchType=${searchType}&search=${search}&pNum="+pNum;
@@ -37,6 +38,11 @@
 			if (count == 0) {
 				alert("하나이상 선택하시오");
 				bool = false;
+			}else{
+				var isDel = confirm(count+" 개 게시글을 정말 삭제하시겠습니까?");
+				if(!(isDel)){
+					bool = false;
+				}
 			}
 			return bool;
 		});
