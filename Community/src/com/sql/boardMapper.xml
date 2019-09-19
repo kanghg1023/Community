@@ -17,10 +17,10 @@
 			READCOUNT, ENABLED, REFER, DEPTH FROM D_BOARD
 			WHERE KINDSEQ=#{kindseq}
 			<if test="title != null">
-				AND TITLE LIKE '%'||#{title}||'%'
+				AND TITLE LIKE '%'||#{title}||'%' AND ENABLED='N'
 			</if>
 			<if test="email != null">
-				AND EMAIL=#{email}
+				AND EMAIL=#{email} AND ENABLED='N'
 			</if>
 		)
 		WHERE CEIL(RN/5)=#{pNum}
@@ -96,11 +96,11 @@
 	</select>
 	
 	<select id="pageMaxSearchTitle" parameterType="Map" resultType="int">
-		SELECT CEIL(COUNT(*)/5) FROM D_BOARD WHERE KINDSEQ=#{kindseq} AND TITLE LIKE '%'||#{title}||'%'
+		SELECT CEIL(COUNT(*)/5) FROM D_BOARD WHERE KINDSEQ=#{kindseq} AND TITLE LIKE '%'||#{title}||'%' AND ENABLED='N'
 	</select>
 	
 	<select id="pageMaxSearchEmail" parameterType="Map" resultType="int">
-		SELECT CEIL(COUNT(*)/5) FROM D_BOARD WHERE KINDSEQ=#{kindseq} AND EMAIL=#{email}
+		SELECT CEIL(COUNT(*)/5) FROM D_BOARD WHERE KINDSEQ=#{kindseq} AND EMAIL=#{email} AND ENABLED='N'
 	</select>
 	
 	<select id="bestlist" resultType="BoardDto">

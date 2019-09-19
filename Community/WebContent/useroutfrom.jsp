@@ -56,7 +56,7 @@
 		</tr>
 		<c:if test="${dto.role != 'ADMIN'}">
 			<tr>
-				<td colspan="2">
+				<td colspan="2" id="btn">
 					<input type="submit" value="강제탈퇴" class="button"/>
 				</td>
 			</tr>
@@ -64,6 +64,5 @@
 	</table>
 </form>
 </div>
-
 </body>
 </html>

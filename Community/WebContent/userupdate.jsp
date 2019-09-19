@@ -8,8 +8,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script type="text/javascript"
+	src="http://code.jquery.com/jquery-latest.js"></script>
 <title>정보수정하기</title>
 <link rel="stylesheet" href="css/userupdate.css">
+<script src="js/userupdate.js"></script>
 </head>
 <body>
 <div id="container">
@@ -24,14 +27,14 @@
 		</tr>
 		<tr>
 			<th>닉네임</th>
-			<td><input type="text" name="nick" value="${ldto.nick}"/></td>
+			<td><input type="text" name="nick" value="${ldto.nick}" id="nick"/></td>
 		</tr>
 		<tr>
 			<th>전화번호</th>
-			<td><input type="text" name="phone" value="${ldto.phone}"/></td>
+			<td><input type="text" name="phone" value="${ldto.phone}" id="phone"/></td>
 		</tr>
 		<tr>
-			<td colspan="2" align="right">
+			<td colspan="2" id="btn">
 				<input type="submit" value="정보수정" class="button"/>
 			</td>
 		</tr>

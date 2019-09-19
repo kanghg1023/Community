@@ -34,8 +34,39 @@
     margin: 0px auto;
 }
 
+#centerbar {
+	width: 694px;
+	float: right;
+	margin-right: 8px;
+}
+
+#gall_list {
+	box-sizing: border-box;
+	border: solid 1px blue;
+	column-width: 694px;
+}
+
+#gall_list hr {
+	border: solid 1px #369;
+}
+
+.gallery {
+	list-style-type: none;
+	text-align: left;
+	font-size: 15px;
+}
+
+.gallery li a {
+	text-decoration: none;
+	color: black;
+}
+
+.gallery li a:hover {
+	text-decoration: underline;
+}
+
 #rightbar {
-	width: 290px;
+	width: 288px;
 	float: right;
 	margin-left: 8px;
 }
@@ -44,8 +75,23 @@
 	box-sizing: border-box;
 	position: static;
 	float: right;
-	margin-bottom: 4px;
-	column-width: 290px;
+	margin: 3px;
+	column-width: 280px;
+}
+
+.lMessage {
+	list-style-type: square;
+	text-align: left;
+	font-size: 15px;
+}
+
+.lMessage li a {
+	text-decoration: none;
+	color: black;
+}
+
+.lMessage li a:hover {
+	text-decoration: underline;
 }
 
 .logout {
@@ -65,11 +111,10 @@
 
 .outBtn {
 	box-sizing: content-box;
-	
 }
 
-.wrapper {
-	border:solid 1px blue;
+.l_wrapper {
+	border:solid 1px black;
  	display: flex;
   	align-items: center;
   	flex-direction: column; 
@@ -105,27 +150,59 @@ h4 {
 	margin-bottom: 0px; 
 }
 
+h4 img {
+	width: 16px; height: 16px;
+}
+
 #best {
 	box-sizing: border-box;
-	border: solid 1px red;
+/* 	border: solid 1px red; */
 	position: static;
 	float: right;
-	margin-top: 4px;
-	column-width: 290px;
+	margin: 3px;
+	column-width: 280px;
 }
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th {
+	text-align: center;
+	font-size: 14px;
+}
+
+td {
+	text-align: left;
+	padding: 5px;
+	font-size: 14px;
+}
+
+.best_title {
+	text-decoration: none;
+  	color: black;
+}
+
+.best_title:hover {
+	text-decoration: underline;
+}
+
+.b_wrapper {
+	border:solid 1px gray;
+ 	display: flex;
+  	align-items: center;
+  	flex-direction: column; 
+  	padding: 10px;
+}
+
+#joa {
+	text-align: center;
+}
+
+tr:nth-child(even) {background-color: #f2f2f2;}
 
 .sel {
-	
-}
-
-#centerbar {
-	width: 694px;
-	float: right;
-	margin-right: 8px;
-}
-
-#list {
-	box-sizing: border-box;
-	border: solid 1px blue;
-	column-width: 694px;
+	border: white solid; 
+	border-width: 1px 0px 1px 0px;
 }

@@ -47,7 +47,7 @@
 		<td><textarea rows="10" cols="60" name="content" ></textarea></td>
 	</tr>
 	<tr>
-		<td colspan="2">
+		<td colspan="2" id="btn">
 			<input type="submit" value="완료" class="button"/>
 			<input type="button" value="취소" onclick="cancel()" class="button"/>
 		</td>

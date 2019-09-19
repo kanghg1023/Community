@@ -32,7 +32,7 @@
 		<td>${ldto.role eq "USER" ? "일반회원" : "정회원"}</td>
 	</tr>
 	<tr>
-		<td colspan="2" align="right">
+		<td colspan="2" id="btn">
 			<button onclick="location.href='LoginController.do?command=withdraw&email=${ldto.email}'">회원탈퇴</button>
 			<button onclick="location.href='LoginController.do?command=userUpdate'">정보수정</button>
 		</td>

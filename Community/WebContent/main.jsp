@@ -30,15 +30,21 @@
 <div id="main_content"><!-- 메인컨텐츠 -->
 <div id="rightbar"><!-- 오른쪽바 -->
 <div id="login"><!-- 로그인폼 -->
-<div class="wrapper">
+<div class="l_wrapper">
   <div id="formContent">
 <c:choose>
 	<c:when test="${ldto == null}">
 		<form action="LoginController.do" method="post">
 			<input type="hidden" name="command" value="login" />
 			<form>
+					<div>
+					<img alt="이메일" src="img/email.png">
 					<input type="email" name="email" id="email" placeholder="이메일"/>
+					</div>
+					<div>
+					<img alt="패스워드" src="img/password.png">
 					<input type="password" name="password" id="password" placeholder="비밀번호"/>
+					</div>
 					<hr />
 					<input type="submit" value="로그인" />
 					<input type="button" value="회원가입" onclick="regist()" />
@@ -49,13 +55,13 @@
 		<c:choose>
 			<c:when test="${ldto.role eq 'ADMIN'}">
 				<div>
-					${ldto.nick}님 반갑습니다.
+					<img alt="관리자" src="img/admin.png"> ${ldto.nick}님 반갑습니다.
 					<div class="outBtn">
 					<a href="LoginController.do?command=logout" class="logout">로그아웃</a>
 					</div>
 				</div>
 				<hr />
-				<ul>
+				<ul class="lMessage">
 					<li><a href="LoginController.do?command=alluserstatus">전체회원정보</a></li>
 					<li><a href="LoginController.do?command=alluserlist">사용중인회원목록</a></li>
 					<li><a href="ListController.do?command=listadmin&listpNum=1">게시판 관리</a>
@@ -63,7 +69,7 @@
 			</c:when>
 			<c:otherwise>
 				<div>
-					${ldto.nick}님 반갑습니다.<br>(등급 : 
+					<img alt="회원" src="img/user.png"> ${ldto.nick}님 반갑습니다.<br>(등급 : 
 					<c:choose>
 						<c:when test="${ldto.role eq 'USER'}">
 							일반회원)
@@ -77,7 +83,7 @@
 					</div>
 				</div>
 				<hr />
-				<ul>
+				<ul class="lMessage">
 					<li><a href="LoginController.do?command=userinfo&email=${ldto.email}">내 정보보기</a></li>
 					<li><a href="ListController.do?command=addlistfrom">게시판 신청하기</a>
 				</ul>
@@ -89,24 +95,24 @@
 </div><!-- .wrapper -->
 </div><!-- /로그인폼 -->
 <div id="best"><!-- 베스트 -->
-<div class="wrapper">
-<h4>베스트 추천글</h4>
+<div class="b_wrapper">
+<h4><img alt="베스트" src="img/best.png"> 베스트 추천글</h4>
 <table border="1" class="sel">
 	<tr>
-		<td>제목</td>
-		<td>작성자</td>
+		<th>제목</th>
+		<th>작성자</th>
 		<td><img alt="좋아요" src="img/heart2.png"></td>
 	</tr>
 	<c:forEach items="${bestlist}" var="dto">
 		<tr>
 			<td>
-				<a href="BoardController.do?command=boarddetail&seq=${dto.seq}&kindseq=${dto.kindseq}">${dto.title}</a>
+				<a class="best_title" href="BoardController.do?command=boarddetail&seq=${dto.seq}&kindseq=${dto.kindseq}">${dto.title}</a>
 			</td>
 			<td>
 				<jsp:setProperty property="emailNick" name="util" value="${dto.email}" />
 				<jsp:getProperty property="emailNick" name="util" />
 			</td>
-			<td>${dto.rk}</td>
+			<td id="joa">${dto.rk}</td>
 		</tr>
 	</c:forEach>
 </table>
@@ -119,10 +125,10 @@
 	</script>
 </c:if>
 <div id="centerbar"><!-- 중간바 -->
-<div id="list"><!-- 게시판목록 -->
-<h4>게시판목록</h4>
+<div id="gall_list"><!-- 게시판목록 -->
+<h4><img alt="목록" src="img/list.png"> 게시판목록</h4>
 <hr />
-<ul>
+<ul class="gallery">
 <c:forEach items="${blist}" var="list">
 	<c:if test="${list.enabled eq 'Y'}">
 		<li><a href="BoardController.do?command=boardlist&kindseq=${list.kindseq}&pNum=1">${list.kind}</a></li>

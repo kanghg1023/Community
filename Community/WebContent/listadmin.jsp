@@ -13,6 +13,23 @@
 	function allSel(ele){
 		$("input[name=chk]").prop("checked",$(ele).prop("checked"));
 	}
+	
+	$(function() {	
+		$("form").submit(function() {
+			var bool = true;
+			var count = $(this).find("input[name=chk]:checked").length; //체크된 input태그의 개수
+			if (count == 0) {
+				alert("하나이상 선택하시오");
+				bool = false;
+			}else{
+				var isDel = confirm(count+"개 게시판을 개설하시겠습니까?");
+				if(!(isDel)){
+					bool = false;
+				}
+			}
+			return bool;
+		});
+	});
 </script>
 </head>
 <body>
