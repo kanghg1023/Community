@@ -82,6 +82,26 @@ public class ListDao extends SqlMapConfig{
 		return list;
 	}
 	
+	public boolean changelist(String kindseq, String enabled) {
+		int count = 0;
+		Map<String, String> map = new HashMap<>();
+		map.put("kindseq",kindseq);
+		map.put("enabled",enabled);
+		
+		SqlSession sqlSession = null;
+		
+		try {
+			sqlSession = getSqlSessionFactory().openSession(true);
+			count = sqlSession.update(nameSpace+"changelist",map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			sqlSession.close();
+		}
+
+		return count>0 ? true : false;
+	}
+	
 	public boolean openlist(String[] kindseqs) {
 		int count = 0;
 		Map<String, String[]> map = new HashMap<>();

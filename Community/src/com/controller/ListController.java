@@ -68,18 +68,32 @@ public class ListController extends HttpServlet {
 			request.setAttribute("listpNum", listpNum);
 			request.setAttribute("map", map);
 			request.setAttribute("alist", alist);
-			request.setAttribute("blist", blist);
+			if(blist != null) {
+				request.setAttribute("blist", blist);
+			}
 			dispatch("listadmin.jsp", request, response);
 		}else if(command.equals("openlist")){
 			String[] kindseqs = request.getParameterValues("chk");
 			boolean isS = dao.openlist(kindseqs);
 			if(isS) {
-				response.sendRedirect("ListController.do?command=listadmin");
+				response.sendRedirect("ListController.do?command=listadmin&listpNum=1");
+			}else {
+				request.setAttribute("msg", "개설 실패");
+				dispatch("error.jsp", request, response);
+			}
+		}else if(command.equals("changelist")){
+			String kindseq = request.getParameter("kindseq");
+			String enabled = request.getParameter("enabled");
+			
+			boolean isS = dao.changelist(kindseq,enabled);
+			if(isS) {
+				response.sendRedirect("ListController.do?command=listadmin&listpNum=1");
 			}else {
 				request.setAttribute("msg", "개설 실패");
 				dispatch("error.jsp", request, response);
 			}
 		}
+		
 		
 	}
 	

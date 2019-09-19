@@ -36,19 +36,17 @@
 	<c:when test="${ldto == null}">
 		<form action="LoginController.do" method="post">
 			<input type="hidden" name="command" value="login" />
-			<form>
-					<div>
-					<img alt="이메일" src="img/email.png">
-					<input type="email" name="email" id="email" placeholder="이메일"/>
-					</div>
-					<div>
-					<img alt="패스워드" src="img/password.png">
-					<input type="password" name="password" id="password" placeholder="비밀번호"/>
-					</div>
-					<hr />
-					<input type="submit" value="로그인" />
-					<input type="button" value="회원가입" onclick="regist()" />
-			</form>
+				<div>
+				<img alt="이메일" src="img/email.png">
+				<input type="email" name="email" id="email" placeholder="이메일"/>
+				</div>
+				<div>
+				<img alt="패스워드" src="img/password.png">
+				<input type="password" name="password" id="password" placeholder="비밀번호"/>
+				</div>
+				<hr />
+				<input type="submit" value="로그인" />
+				<input type="button" value="회원가입" onclick="regist()" />
 		</form>
 	</c:when>
 	<c:otherwise>

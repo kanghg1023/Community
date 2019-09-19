@@ -17,10 +17,10 @@
 			READCOUNT, ENABLED, REFER, DEPTH FROM D_BOARD
 			WHERE KINDSEQ=#{kindseq}
 			<if test="title != null">
-				AND TITLE LIKE '%'||#{title}||'%' AND ENABLED='N'
+				AND TITLE LIKE '%'||#{title}||'%' AND ENABLED='Y'
 			</if>
 			<if test="email != null">
-				AND EMAIL=#{email} AND ENABLED='N'
+				AND EMAIL=#{email} AND ENABLED='Y'
 			</if>
 		)
 		WHERE CEIL(RN/5)=#{pNum}
@@ -37,7 +37,7 @@
 	<insert id="insertBoard" parameterType="BoardDto">
 		INSERT INTO D_BOARD
 		VALUES(D_BOARD_SEQ.NEXTVAL, #{title}, #{content}, #{email}, SYSDATE,
-		#{kindseq}, 0, 'N', (SELECT NVL(MAX(REFER)+1,0) FROM D_BOARD), 0, 0)
+		#{kindseq}, 0, 'Y', (SELECT NVL(MAX(REFER)+1,0) FROM D_BOARD), 0, 0)
 	</insert>
 	
 <!-- 	이메일을 닉네임으로 변경 -->
@@ -62,7 +62,7 @@
 	
 <!-- 	삭제 -->
 	<update id="mulDel" parameterType="Map">
-		UPDATE D_BOARD SET ENABLED='Y' WHERE SEQ IN
+		UPDATE D_BOARD SET ENABLED='N' WHERE SEQ IN
 		<foreach collection="seqs" item="seq" open="(" close=")" separator=",">
 			#{seq}
 		</foreach>
@@ -85,7 +85,7 @@
 	<insert id="replyInsert" parameterType="BoardDto">
 		INSERT INTO D_BOARD
 		VALUES(D_BOARD_SEQ.NEXTVAL, #{title}, #{content}, #{email}, SYSDATE,
-		#{kindseq}, 0, 'N',
+		#{kindseq}, 0, 'Y',
 		(SELECT REFER FROM D_BOARD WHERE SEQ=#{seq}),
 		((SELECT STEP FROM D_BOARD WHERE SEQ=#{seq})+1),
 		((SELECT DEPTH FROM D_BOARD WHERE SEQ=#{seq})+1))
@@ -96,22 +96,24 @@
 	</select>
 	
 	<select id="pageMaxSearchTitle" parameterType="Map" resultType="int">
-		SELECT CEIL(COUNT(*)/5) FROM D_BOARD WHERE KINDSEQ=#{kindseq} AND TITLE LIKE '%'||#{title}||'%' AND ENABLED='N'
+		SELECT CEIL(COUNT(*)/5) FROM D_BOARD WHERE KINDSEQ=#{kindseq} AND TITLE LIKE '%'||#{title}||'%' AND ENABLED='Y'
 	</select>
 	
 	<select id="pageMaxSearchEmail" parameterType="Map" resultType="int">
-		SELECT CEIL(COUNT(*)/5) FROM D_BOARD WHERE KINDSEQ=#{kindseq} AND EMAIL=#{email} AND ENABLED='N'
+		SELECT CEIL(COUNT(*)/5) FROM D_BOARD WHERE KINDSEQ=#{kindseq} AND EMAIL=#{email} AND ENABLED='Y'
 	</select>
 	
 	<select id="bestlist" resultType="BoardDto">
 		<![CDATA[
 		SELECT B.SEQ, B.TITLE, B.EMAIL, B.KINDSEQ, L.RK 
-		FROM D_BOARD B,
+		FROM D_BOARD B, D_LIST J,
 			(SELECT COUNT(SEQ) AS RK, SEQ,
 				ROW_NUMBER() OVER (ORDER BY COUNT(SEQ) DESC) AS RN
 				FROM D_LIKE GROUP BY SEQ ORDER BY RN) L
 		WHERE B.SEQ = L.SEQ
-		AND B.ENABLED = 'N'
+		AND B.KINDSEQ = J.KINDSEQ
+		AND B.ENABLED = 'Y'
+		AND J.ENABLED = 'Y'
 		AND ROWNUM <= 5
 		ORDER BY L.RN
 		]]>

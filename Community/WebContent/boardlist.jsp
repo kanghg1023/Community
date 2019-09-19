@@ -98,7 +98,7 @@
 									</c:if></td>
 								<td id="seq">${dto.seq}</td>
 								<c:choose>
-									<c:when test="${dto.enabled eq 'Y'}">
+									<c:when test="${dto.enabled eq 'N'}">
 										<td id="title1">----삭제된 게시글입니다.----</td>
 									</c:when>
 									<c:otherwise>

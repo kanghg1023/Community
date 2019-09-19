@@ -29,6 +29,12 @@
 			}
 			return bool;
 		});
+		
+		$(".listchange").click(function(){
+			var kindseq = $(this).val();
+			var enabled = $(this).prev("select").val();
+			location.href="ListController.do?command=changelist&kindseq="+kindseq+"&enabled="+enabled;
+		});
 	});
 </script>
 </head>
@@ -45,7 +51,7 @@
 		<th>게시판 소개</th>
 	</tr>
 	<c:choose>
-		<c:when test="${blist != null}">
+		<c:when test="${blist.size() > 0}">
 			<c:forEach items="${blist}" var="list">
 				<tr>
 					<td id="chk"><input type="checkbox" name="chk" value="${list.kindseq}"></td>
@@ -61,7 +67,7 @@
 		</c:when>
 		<c:otherwise>
 			<tr>
-				<td>신청된 게시판이 없습니다.</td>
+				<td colspan="3">신청된 게시판이 없습니다.</td>
 			</tr>
 		</c:otherwise>
 	</c:choose>
@@ -79,11 +85,11 @@
 			<td>${list.kind}</td>
 			<td>${list.kindcontent}</td>
 			<td>
-				<select name="role">
+				<select name="enabled">
 					<option value="Y" ${list.enabled eq "Y" ? "selected" : ""}>개설</option>
 					<option value="S" ${list.enabled eq "S" ? "selected" : ""}>폐쇄</option>
 				</select>
-				<button class="listchange" value="${dto.email}">변경</button>
+				<button class="listchange" value="${list.kindseq}">변경</button>
 			</td>
 		</tr>
 	</c:forEach>

@@ -17,7 +17,7 @@
 	</select>
 	
 	<select id="setUplist" resultType="ListDto">
-		SELECT RN, KINDSEQ, ENABLED, KIND, KINDCONTENT 
+		SELECT KINDSEQ, ENABLED, KIND, KINDCONTENT 
 		FROM (SELECT ROW_NUMBER() OVER (ORDER BY KINDSEQ) AS RN,
 				KINDSEQ, ENABLED, KIND, KINDCONTENT FROM D_LIST
 				WHERE ENABLED != 'N')
@@ -34,4 +34,8 @@
 	<select id="listPageMax" resultType="int">
 		SELECT CEIL(COUNT(*)/5) FROM D_LIST
 	</select>
+	
+	<update id="changelist" parameterType="Map">
+		UPDATE D_LIST SET ENABLED=#{enabled} WHERE KINDSEQ=#{kindseq}
+	</update>
 </mapper>

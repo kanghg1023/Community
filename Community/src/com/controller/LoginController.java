@@ -75,8 +75,8 @@ public class LoginController extends HttpServlet {
 				dispatch("LoginController.do?command=index", request, response);
 			}else{
 				if(ldto.getEnabled().equals("N")){
-					request.setAttribute("msg", "탈퇴한 회원입니다");
-					dispatch("error.jsp", request, response);
+					request.setAttribute("msg", "아이디나 패스워드를 확인하세요");
+					dispatch("LoginController.do?command=index", request, response);
 				}else{
 					session.setAttribute("ldto", ldto); //세션삽입
 					session.setMaxInactiveInterval(10*60*1000);//10분간 요청이 없으면 세션을 삭제
