@@ -41,6 +41,7 @@
 <body>
 <jsp:include page="header.jsp" />
 <div id="container">
+<a href="ListController.do?command=addlistfrom" title="바로 추가" id="add">게시판 추가하기</a>
 <h2>개설 대기중인 갤러리</h2>
 <form action="ListController.do" method="post">
 <input type="hidden" name="command" value="openlist" />
@@ -73,11 +74,11 @@
 	</c:choose>
 </table>
 </form>
-<a href="ListController.do?command=addlistfrom" title="바로 추가">[게시판 추가하기]</a>
-<table border="1" class="table">
+<h2>갤러리 관리</h2>
+<table border="1" id="gal">
 	<tr>
-		<th>게시판명</th>
-		<th>게시판 소개</th>
+		<th id="kind">게시판명</th>
+		<th id="kindcontent">게시판 소개</th>
 		<th>상태</th>
 	</tr>
 	<c:forEach items="${alist}" var="list">
@@ -85,7 +86,7 @@
 			<td>${list.kind}</td>
 			<td>${list.kindcontent}</td>
 			<td>
-				<select name="enabled">
+				<select name="enabled" >
 					<option value="Y" ${list.enabled eq "Y" ? "selected" : ""}>개설</option>
 					<option value="S" ${list.enabled eq "S" ? "selected" : ""}>폐쇄</option>
 				</select>
